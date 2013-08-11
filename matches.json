@@ -17,7 +17,7 @@
 				]
 			},
 			{
-				"name" : "Jam",
+				"name": "Jam",
 				"score": 8,
 				"players" :[
 					"Rikki",
@@ -46,9 +46,9 @@
 				]
 			},
 			{
-				"name" : "Megalodon",
+				"name": "Megalodon",
 				"score": 13,
-				"players" :[
+				"players": [
 					"Rikki",
 					"Rob",
 					"Russell",
@@ -56,7 +56,8 @@
 					"Danny"
 				]
 			}
-		]
+		],
+		"weather": "hot"
 	},
 	{
 		"date": "2013-07-26 18:00:00",
@@ -84,7 +85,7 @@
 					"Ryan"
 				]
 			}
-		] 
+		]
 	},
 	{
 		"date": "2013-08-02 18:00:00",
@@ -123,7 +124,7 @@
 				"score": 9,
 				"players": [
 					"Rikki",
-					"Darren", 
+					"Darren",
 					"Dan",
 					"Ruben",
 					"Danny"
@@ -140,6 +141,7 @@
 					"Josh"
 				]
 			}
-		]
+		],
+		"weather": "mild"
 	}
 ]
