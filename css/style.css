@@ -1,0 +1,191 @@
+* {
+	margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+html, body {
+	width:100%;
+	height:100%;
+    font-family:Voces, Arial, sans-serif;
+    background:#333;
+}
+
+header {
+	color:#fff;
+	height:100%;
+	width:150px;
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+section {
+	margin-left:150px;
+	border-radius:3px;
+	background:#fff;
+	overflow:auto;
+}
+
+a, a:visited, a:active {
+	color:#09f;
+	text-decoration:none;
+}
+
+a.active {
+	color:#fff;
+	background:#09f;
+}
+
+nav > ul {
+	display:block;
+}
+
+nav > ul > li {
+	list-style-type:none;
+	display:block;
+}
+
+nav > ul > li > a {
+	display:block;
+	padding:3px 6px;
+}
+
+.stat {
+	background:#ccc;
+	padding:10px;
+	margin:20px;
+	border-radius:3px;
+	box-sizing:border-box;
+	width:25%;
+	display:inline-block;
+}
+
+.stat-label {
+	font-size:16px;
+	color:#666;
+}
+
+.stat-value {
+	font-size:40px;
+	color:#333;
+}
+
+.stat-value-detail {
+	font-size:24px;
+	color:#999;
+}
+
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+	width:100%;
+}
+
+table th {
+	font-weight:bold;
+	text-align:left;
+	padding:5px 10px;
+	color:#666;
+	text-align:right;
+	font-size:12px;
+	text-transform:uppercase;
+}
+
+table tr:nth-child(odd) td {
+	background:#e6e6e6;
+}
+
+table td {
+	text-align:right;
+	padding:5px 10px;
+	border-top:1px solid #ccc;
+	color:#333;
+	font-size:24px;
+}
+
+.match-nav {
+	width:25%;
+	box-sizing:border-box;
+	float:left;
+}
+
+.match-nav > ul {
+	padding:0;
+	margin:0;
+	display:block;
+}
+
+.match-nav > ul > li {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	display:block;
+}
+
+.match-nav > ul > li {
+	border-bottom:1px solid #e5e5e5;
+}
+
+.match-nav > ul > li:last-child {
+	border-bottom:none;
+}
+
+.match-nav > ul > li > a {
+	display:block;
+	padding:5px 10px;
+}
+
+.match-details {
+	width:75%;
+	box-sizing:border-box;
+	float:right;
+}
+
+.match-team {
+	padding:10px;
+	border-left:1px solid #ccc;
+	box-sizing:border-box;
+	width:50%;
+	padding:10px;
+	display:inline-block;
+}
+
+.match-team-red {
+	float:left;
+	border-top:5px solid #900;
+}
+
+.match-team-blue {
+	float:right;
+	border-top:5px solid #009;
+}
+
+.match-teamname {
+	font-size:40px;
+	color:#333;
+}
+
+.match-score {
+	font-size:24px;
+	color:#999;
+}
+
+.match-players {
+	margin:0;
+	color:#666;
+}
+
+.match-players > li {
+	list-style-type:none;
+}
+
+.match-weather,
+.match-pitch {
+	clear:both;
+	background:#ccc;
+	color:#333;
+	padding:10px;
+	border-radius:3px;
+	display:inline-block;
+	margin:10px;
+}

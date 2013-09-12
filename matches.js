@@ -1,5 +1,6 @@
-var matches = [
+App.matches = [
   {
+  		"id": 1,
 		"date": "2013-07-10 18:00:00",
 		"pitch": 7,
 		"weather": "hot",
@@ -32,6 +33,7 @@ var matches = [
 		]
 	},
 	{
+		"id": 2,
 		"date": "2013-07-13 17:00:00",
 		"pitch": 6,
 		"weather": "hot",
@@ -61,6 +63,7 @@ var matches = [
 		]
 	},
 	{
+		"id": 3,
 		"date": "2013-07-26 18:00:00",
 		"pitch": 5,
 		"weather": "hot",
@@ -90,6 +93,7 @@ var matches = [
 		]
 	},
 	{
+		"id": 4,
 		"date": "2013-08-02 18:00:00",
 		"pitch": 5,
 		"weather": "mild",
@@ -119,6 +123,7 @@ var matches = [
 		]
 	},
 	{
+		"id": 5,
 		"date": "2013-08-09 18:00:00",
 		"pitch": 5,
 		"weather": "mild",
@@ -148,6 +153,7 @@ var matches = [
 		]
 	},
 	{
+		"id": 6,
 		"date": "2013-08-11 17:00:00",
 		"pitch": 5,
 		"weather": "mild",
@@ -177,6 +183,7 @@ var matches = [
 		]
 	},
 	{
+		"id": 7,
 		"date": "2013-08-14 18:00:00",
 		"pitch": 2,
 		"weather": "mild",
@@ -196,19 +203,20 @@ var matches = [
 				"players": [
 					"Rikki",
 					"Ady",
-					"Kirsty",
+					"Kirstie",
 					"Danny"
 				]
 			}
 		]
 	},
 	{
+		"id": 8,
 		"date": "2013-08-30 18:00:00",
 		"pitch": 2,
 		"weather": "mild",
 		"teams": [
 			{
-				"name": "Blue",
+				"name": "Red",
 				"score": 19,
 				"players": [
 					"Rob",
@@ -218,7 +226,7 @@ var matches = [
 				]
 			},
 			{
-				"name": "Red",
+				"name": "Blue",
 				"score": 13,
 				"players": [
 					"Stephen",
@@ -230,15 +238,16 @@ var matches = [
 		]
 	},
 	{
-		"date": "2013-08-06 18:00:00",
+		"id": 9,
+		"date": "2013-09-06 18:00:00",
 		"pitch": 1,
 		"weather": "mild",
 		"teams": [
 			{
-				"name": "Blue",
+				"name": "Red",
 				"score": 10,
 				"players": [
-					"Rikki"
+					"Rikki",
 					"Rob",
 					"Ruben",
 					"Josh",
@@ -246,7 +255,7 @@ var matches = [
 				]
 			},
 			{
-				"name": "Red",
+				"name": "Blue",
 				"score": 12,
 				"players": [
 					"Darren",

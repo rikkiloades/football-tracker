@@ -1,76 +1,229 @@
-var gamesPlayed = 0;
-var playedCounts = {};
-var playedTogether = {};
-var playerWins = {};
-var playerLosses = {};
+App = Ember.Application.create({
+	matches: [],
+	players: [],
+	ready: function() {
+		this.computePlayerStats();
+	},
+	computePlayerStats: function() {
+		var players = {};
 
-matches.forEach(function(match) {
-  if (match.teams[0].score == null || match.teams[1].score == null) {
-		return;
-	}
-
-	gamesPlayed++;
-
-	var winningTeam = null;
-	var loosingTeam = null;
-	if (match.teams[0].score > match.teams[1].score) {
-		winningTeam = match.teams[0];
-		loosingTeam = match.teams[1];
-	}
-	else if (match.teams[0].score < match.teams[1].score) {
-		winningTeam = match.teams[0];
-		loosingTeam = match.teams[1];	
-	}
-
-	if (winningTeam == null) {
-		return;
-	}
-
-	winningTeam.players.forEach(function(player) {
-		if (!playerWins.hasOwnProperty(player)) {
-			playerWins[player] = 0;
-		}
-
-		playerWins[player]++;
-	});
-
-	loosingTeam.players.forEach(function(player) {
-		if (!playerLosses.hasOwnProperty(player)) {
-			playerLosses[player] = 0;
-		}
-
-		playerLosses[player]++;
-	});
-
-	match.teams.forEach(function(match) {
-		for (var currentPlayer = 0; currentPlayer < match.players.length; currentPlayer++) {
-			// calculates how many times each player plays
-			if (!playedCounts.hasOwnProperty(match.players[currentPlayer])) {
-				playedCounts[match.players[currentPlayer]] = 0;
+		function getPlayer(name)
+		{
+			if (players.hasOwnProperty(name)) {
+				return players[name];
 			}
-			playedCounts[match.players[currentPlayer]]++;
 
-			// calculate who plays togehter the most
-			for (var otherPlayer = currentPlayer + 1; otherPlayer < match.players.length; otherPlayer++) {
-				if (match.players[currentPlayer] > match.players[otherPlayer]) {
-					var playerCombo = match.players[currentPlayer] + ' + ' + match.players[otherPlayer];
+			var newPlayer = App.Player.create({name: name});
+
+			players[name] = newPlayer;
+
+			return newPlayer;
+		}
+
+		this.matches.forEach(function(match) {
+			match.teams[0].players.forEach(function(player) {
+				var player = getPlayer(player);
+
+				player.goalsFor += match.teams[0].score;
+				player.goalsAgainst += match.teams[1].score;
+				player.matches++;
+
+				if (match.teams[0].score > match.teams[1].score) {
+					player.wins++;
+				}
+				else if (match.teams[0].score < match.teams[1].score) {
+					player.losses++;
 				}
 				else {
-					var playerCombo = match.players[otherPlayer] + ' + ' + match.players[currentPlayer];
+					player.draws++;
 				}
+			});
 
-				if (!playedTogether.hasOwnProperty(playerCombo)) {
-					playedTogether[playerCombo] = 0;
+			match.teams[1].players.forEach(function(player) {
+				var player = getPlayer(player);
+
+				player.goalsFor += match.teams[0].score;
+				player.goalsAgainst += match.teams[1].score;
+				player.matches++;
+
+				if (match.teams[0].score > match.teams[1].score) {
+					player.wins++;
 				}
+				else if (match.teams[0].score < match.teams[1].score) {
+					player.losses++;
+				}
+				else {
+					player.draws++;
+				}
+			});
+		});
 
-				playedTogether[playerCombo]++;
-			}
+		for (var i in players ) {
+			this.players.push(players[i]);
 		}
-	});
+	}
 });
 
-console.log('Games played: ' + matches.length);
-console.log('Wins by player: ' + JSON.stringify(playerWins));
-console.log('Losses by player: ' + JSON.stringify(playerLosses));
-console.log('How many times has each player played: ' + JSON.stringify(playedCounts));
-console.log('Who played together the most: ' + JSON.stringify(playedTogether));
+App.Player = Ember.Object.extend({
+	name: '',
+	matches: 0,
+	wins: 0,
+	losses: 0,
+	draws: 0,
+	points: function() {
+		var points = 0;
+
+		points += this.get('wins') * 3;
+		points += this.get('draws') * 1;
+
+		return points;
+	}.property('wins', 'draws'),
+	pointsPerGame: function() {
+		return this.get('points') / this.get('matches');
+	}.property('matches', 'points'),
+	winRatio: function() {
+		return this.get('wins') / this.get('matches');
+	}.property('matches', 'wins'),
+	goalsFor: 0,
+	goalsAgainst: 0,
+	goalsDiff: function() {
+		return this.get('goalsFor') - this.get('goalsAgainst');
+	}.property('goalsFor', 'goalsAgainst'),
+	goalsPerGame: function() {
+		return this.get('goalsFor') / this.get('matches');
+	}.property('matches', 'goalsFor')
+});
+
+App.Router.map(function() {
+ 	this.resource('matches', {path: '/'}, function() {
+ 		this.resource('match', {path: '/matches/:match_id'});
+ 	});
+
+ 	this.resource('players');
+
+ 	this.resource('stats');
+});
+
+App.MatchesRoute = Ember.Route.extend({
+	model: function() {
+		return App.matches;
+	}
+});
+
+App.MatchRoute = Ember.Route.extend({
+	model: function(params) {
+		var match = Ember.A(App.matches).findBy('id', parseInt(params.match_id));
+		return match;
+	}
+});
+
+App.PlayersRoute = Ember.Route.extend({
+	model: function() {
+		return App.players;
+	}
+});
+
+App.PlayerRoute = Ember.Route.extend({
+	model: function(params) {
+		var match = Ember.A(App.players).findBy('id', parseInt(params.player_id));
+		return match;
+	}
+});
+
+App.StatsController = Ember.ObjectController.extend({
+	mostWins: function() {
+		var mostWins = null;
+		App.get('players').forEach(function(player) {
+			if (mostWins === null) {
+				mostWins = player;
+				return;
+			}
+
+			if (mostWins.get('wins') < player.get('wins')) {
+				mostWins = player;
+			}
+		});
+
+		return mostWins;
+	}.property('App.players.@each.wins'),
+
+	mostDraws: function() {
+		var mostDraws = null;
+		App.get('players').forEach(function(player) {
+			if (mostDraws === null) {
+				mostDraws = player;
+				return;
+			}
+
+			if (mostDraws.get('draws') < player.get('draws')) {
+				mostDraws = player;
+			}
+		});
+
+		return mostDraws;
+	}.property('App.players.@each.draws'),
+
+	mostLosses: function() {
+		var mostLosses = null;
+		App.get('players').forEach(function(player) {
+			if (mostLosses === null) {
+				mostLosses = player;
+				return;
+			}
+
+			if (mostLosses.get('losses') < player.get('losses')) {
+				mostLosses = player;
+			}
+		});
+
+		return mostLosses;
+	}.property('App.players.@each.losses'),
+
+	bestGoalDiff: function() {
+		var bestGoalDiff = null;
+		App.get('players').forEach(function(player) {
+			if (bestGoalDiff === null) {
+				bestGoalDiff = player;
+				return;
+			}
+
+			if (bestGoalDiff.get('goalsDiff') < player.get('goalsDiff')) {
+				bestGoalDiff = player;
+			}
+		});
+
+		return bestGoalDiff;
+	}.property('App.players.@each.goalsDiff'),
+
+	worstGoalDiff: function() {
+		var worstGoalDiff = null;
+		App.get('players').forEach(function(player) {
+			if (worstGoalDiff === null) {
+				worstGoalDiff = player;
+				return;
+			}
+
+			if (worstGoalDiff.get('goalsDiff') > player.get('goalsDiff')) {
+				worstGoalDiff = player;
+			}
+		});
+
+		return worstGoalDiff;
+	}.property('App.players.@each.goalsDiff')
+});
+
+Ember.Handlebars.helper('fxdate', function(value, options) {
+	return moment(value, 'YYYY-MM-DD HH:mm:ss').format('Do MMM');
+});
+
+Ember.Handlebars.helper('fxtime', function(value, options) {
+	return moment(value, 'YYYY-MM-DD HH:mm:ss').format('HH:MM');
+});
+
+Ember.Handlebars.helper('fxpct', function(value, options) {
+	return Math.round(parseFloat(value) * 100) + '%';
+});
+
+Ember.Handlebars.helper('fxround', function(value, options) {
+	return Math.round(value);
+});

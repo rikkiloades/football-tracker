@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ember.js - Components: Passing Properties to a Component</title>
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+    <link href="../../stylesheets/site.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="../../stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="../../blog/feed.xml" rel="alternate" type="application/atom+xml" title="Ember.js - Blog" />
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+      _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+      _gaq.push(['_setAccount', 'UA-27675533-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../../javascripts/jquery.bxSlider.min.js"></script>
+
+    <script type="text/javascript">
+      $(function() {
+        var backToTop = $('#back-to-top');
+        var doc = $(document);
+        var offset = backToTop.offset();
+        var marginTop = 90;
+        var showing = false;
+
+        positionBackToTop = function(reset) {
+          if (reset) {
+            backToTop.css({
+              top: '',
+              position: ''
+            });
+            offset = backToTop.offset();
+          }
+
+          if (!showing && doc.scrollTop() > offset.top+200) {
+            showing = true;
+            backToTop.css({
+              position: 'fixed',
+              top: 20,
+              left: offset.left,
+              display:' block'
+            });
+          } else if (showing && doc.scrollTop() <= offset.top+200) {
+            showing = false;
+            backToTop.css({
+              display:'none'
+            });
+          }
+        };
+
+        if (backToTop.length) {
+          backToTop.on('click', function(evt) {
+            $('html,body').animate({scrollTop: 0}, 200);
+            return false;
+          });
+
+          doc.on('scroll', function() {
+            positionBackToTop();
+          });
+        }
+
+        $('.bx-wrapper, .bx-window').width(940);
+      });
+    </script>
+
+    
+  </head>
+
+  <body class="guides guides_components guides_components_passing-properties-to-a-component guides_components_passing-properties-to-a-component_index">
+    <div id="header">
+      <div id="wrapper">
+        <a id="logo" href="../../index.html">&nbsp;</a>
+        <ul id="nav">
+          <li><a href="../../about.html">about</a></li>
+          <li class="active"><a href="../../guides.html">guides</a></li>
+          <li><a href="../../api.html">api</a></li>
+          <li><a href="../../community.html">community</a></li>
+          <li><a href="../../blog.1.html">blog</a></li>
+
+          <li id="search">
+            <form>
+              <input type="text" id="st-search-input" class="st-search-input" />
+            </form>
+            <div id="st-results-container"></div>
+            <script type="text/javascript">
+              var Swiftype = window.Swiftype || {};
+              (function() {
+                Swiftype.key = 'HTNahKf4xmo8GgFbTz4n';
+                Swiftype.inputElement = '#st-search-input';
+                Swiftype.resultContainingElement = '#st-results-container';
+                Swiftype.attachElement = '#st-search-input';
+                Swiftype.renderStyle = "overlay";
+
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.async = true;
+                script.src = "//swiftype.com/embed.js";
+                var entry = document.getElementsByTagName('script')[0];
+                entry.parentNode.insertBefore(script, entry);
+              }());
+            </script>
+          </li>
+
+        </ul>
+
+        <div id="github">
+          <a href="https://github.com/emberjs/ember.js"><img src="../../images/fork-us.png">Fork Us!</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-wrapper">
+      
+      
+        <div id="sidebar">
+          
+    <ol id="toc-list">
+          <li class="level-1">
+            <a href="../getting-started.html">Getting Started</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../getting-started.html">Getting Started</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/planning-the-application.html">Planning The Application</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/creating-a-static-mockup.html">Creating a Static Mockup</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/obtaining-emberjs-and-dependencies.html">Obtaining Ember.js and Dependencies</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/adding-a-route-and-template.html">Adding the First Route and Template</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/modeling-data.html">Modeling Data</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/using-fixutres.html">Using Fixtures</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/displaying-model-data.html">Displaying Model Data</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/displaying-a-models-completeness.html">Displaying a Model's Complete State</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/creating-a-new-model.html">Creating a New Model Instance</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/marking-a-model-as-complete-incomplete.html">Marking a Model as Complete or Incomplete</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/displaying-the-number-of-incomplete-todos.html">Displaying the Number of Incomplete Todos</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/toggle-todo-editing-state.html">Toggling between Showing and Editing States</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/accepting-edits.html">Accepting Edits</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/deleting-todos.html">Deleting a Model</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/adding-child-routes.html">Adding Child Routes</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/show-only-incomplete-todos.html">Transitioning to Show Only Incomplete Todos</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/show-only-complete-todos.html">Transitioning to Show Only Complete Todos</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/show-all-todos-again.html">Transitioning back to Show All Todos</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/display-a-button-to-remove-completed-todos.html">Displaying a Button to Remove All Completed Todos</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/show-when-all-todos-are-complete.html">Indicating When All Todos Are Complete</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/toggle-all-todos.html">Toggling All Todos Between Complete and Incomplete</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../getting-started/using-other-adapters.html">Replacing the Fixture Adapter with Another Adapter</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../concepts/core-concepts.html">Concepts</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../concepts/core-concepts.html">Core Concepts</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../concepts/naming-conventions.html">Naming Conventions</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../application.html">Application</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../application.html">Introduction</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../templates/the-application-template.html">Templates</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../templates/the-application-template.html">The Application Template</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/handlebars-basics.html">Handlebars Basics</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/conditionals.html">Conditionals</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/displaying-a-list-of-items.html">Displaying a List of Items</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/changing-scope.html">Changing Scope</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/binding-element-attributes.html">Binding Element Attributes</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/binding-element-class-names.html">Binding Element Class Names</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/links.html">Links</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/actions.html">Actions</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/rendering-with-helpers.html">Rendering with Helpers</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../templates/writing-helpers.html">Writing Helpers</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../routing.html">Routing</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../routing.html">Introduction</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/defining-your-routes.html">Defining Your Routes</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/generated-objects.html">Generated Objects</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/specifying-a-routes-model.html">Specifying a Route's Model</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/setting-up-a-controller.html">Setting Up a Controller</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/rendering-a-template.html">Rendering a Template</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/redirection.html">Redirecting</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../routing/specifying-the-location-api.html">Specifying the URL Type</a>
+            </li>
+          </ol></li>
+          <li class="level-1 selected">
+            <a href="../components.html">Components</a>
+            <ol class='selected'>
+        
+            <li class="level-3">
+              <a href="../components.html">Introduction</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="defining-a-component.html">Defining a Component</a>
+            </li>
+          
+            <li class="level-3 sub-selected">
+              <a href="passing-properties-to-a-component.html">Passing Properties to a Component</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="wrapping-content-in-a-component.html">Wrapping Content in a Component</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="customizing-a-components-element.html">Customizing a Component's Element</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="handling-user-interaction-with-actions.html">Handling User Interaction with Actions</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../controllers.html">Controllers</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../controllers.html">Introduction</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../controllers/representing-a-single-model-with-objectcontroller.html">Representing a Single Model with ObjectController</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../controllers/representing-multiple-models-with-arraycontroller.html">Representing Multiple Models with ArrayController</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../controllers/dependencies-between-controllers.html">Managing Dependencies Between Controllers</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../models.html">Models</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../models.html">Introduction</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/defining-a-store.html">Defining a Store</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/defining-models.html">Defining Models</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/finding-models.html">Finding Models</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/modifying-attributes.html">Modifying Attributes</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/model-lifecycle.html">Model Lifecycle</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/the-fixture-adapter.html">The Fixture Adapter</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../models/the-rest-adapter.html">The REST Adapter</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../views.html">Views</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../views.html">Introduction</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/defining-a-view.html">Defining a View</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/handling-events.html">Handling Events</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/inserting-views-in-templates.html">Inserting Views in Templates</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/adding-layouts-to-views.html">Adding Layouts to Views</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/customizing-a-views-element.html">Customizing a View's Element</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/built-in-views.html">Built-in Views</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../views/manually-managing-view-hierarchy.html">Manually Managing View Hierarchy</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../object-model/classes-and-instances.html">The Object Model</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../object-model/classes-and-instances.html">Classes and Instances</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../object-model/computed-properties.html">Computed Properties</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../object-model/computed-properties-and-aggregate-data.html">Computed Properties and Aggregate Data with @each</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../object-model/observers.html">Observers</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../object-model/bindings.html">Bindings</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../object-model/reopening-classes-and-instances.html">Reopening Classes and Instances</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../object-model/what-do-i-use-when.html">Bindings, Observers, Computed Properties: What Do I Use When?</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../enumerables.html">Enumerables</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../enumerables.html">Introduction</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../testing/integration.html">Testing</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../testing/integration.html">Integration Testing</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../configuring-ember/disabling-prototype-extensions.html">Configuring Ember.js</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../configuring-ember/disabling-prototype-extensions.html">Disabling Prototype Extensions</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../configuring-ember/embedding-applications.html">Embedding Applications</a>
+            </li>
+          </ol></li>
+          <li class="level-1">
+            <a href="../understanding-ember/the-view-layer.html">Understanding Ember.js</a>
+            <ol>
+        
+            <li class="level-3">
+              <a href="../understanding-ember/the-view-layer.html">The View Layer</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../understanding-ember/managing-asynchrony.html">Managing Asynchrony</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../understanding-ember/keeping-templates-up-to-date.html">Keeping Templates Up-to-Date</a>
+            </li>
+          
+            <li class="level-3">
+              <a href="../understanding-ember/debugging.html">Debugging</a>
+            </li>
+          </ol></li></ol>
+  
+          <div id="back-to-top"><a id="back-top-top" href="passing-properties-to-a-component.html#">&#11014; Back to Top</a></div>
+        </div>
+      
+      <div id="content" class="has-sidebar">
+          
+
+  
+  <div class="chapter">
+    
+        <h1>Passing Properties to a Component 
+          <a href="https://github.com/emberjs/website/tree/master/source/guides/components/passing-properties-to-a-component.md" target="_blank" class="edit-page">
+            Edit Page</a>
+        </h1>
+      
+    <hr>
+    <p>By default, a component does not have access to properties in the
+template scope in which it is used.</p>
+
+<p>For example, imagine you have a <code>blog-post</code> component that is used to
+display a blog post:</p>
+<div class="highlight handlebars "><div class="ribbon"></div><div class="scroller"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+</pre></td>
+  <td class="code"><pre><span class="tag">&lt;script</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">text/x-handlebars</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">components/blog-post</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<span class="inline">  &lt;h1&gt;Component: </span><span class="inline"><span class="inline-delimiter">{{</span><span class="attribute-name">title</span><span class="inline-delimiter">}}</span></span><span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span>Lorem ipsum dolor sit amet.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/script&gt;</span>
+</pre></td>
+</tr></table>
+</div></div>
+<p>You can see that it has a <code>{{title}}</code> Handlebars expression to print the
+value of the <code>title</code> property inside the <code>&lt;h1&gt;</code>.</p>
+
+<p>Now imagine we have the following template and route:</p>
+<div class="highlight js "><div class="ribbon"></div><div class="scroller"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+</pre></td>
+  <td class="code"><pre>App.IndexRoute = Ember.Route.extend({
+  <span class="function">model</span>: <span class="keyword">function</span>() {
+    <span class="keyword">return</span> {
+      <span class="key">title</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Rails is omakase</span><span class="delimiter">&quot;</span></span>
+    };
+  }
+});
+</pre></td>
+</tr></table>
+</div></div><div class="highlight handlebars "><div class="ribbon"></div><div class="scroller"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+</pre></td>
+  <td class="code"><pre><span class="comment">{{! index.handlebars }}</span>
+<span class="tag">&lt;h1&gt;</span>Template: <span class="inline"><span class="inline-delimiter">{{</span><span class="attribute-name">title</span><span class="inline-delimiter">}}</span></span><span class="tag">&lt;/h1&gt;</span>
+<span class="inline"><span class="inline-delimiter">{{</span><span class="attribute-name">blog-post</span><span class="inline-delimiter">}}</span></span>
+</pre></td>
+</tr></table>
+</div></div>
+<p>Running this code, you will see that the first <code>&lt;h1&gt;</code> (from the outer
+template) displays the <code>title</code> property, but the second <code>&lt;h1&gt;</code> (from
+inside the component) is empty.</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/ufedet/2/embed?live">JS Bin</a></p>
+
+<p>We can fix this by making the <code>title</code> property available to the
+component:</p>
+<div class="highlight handlebars "><div class="ribbon"></div><div class="scroller"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+</pre></td>
+  <td class="code"><pre><span class="inline"><span class="inline-delimiter">{{</span><span class="attribute-name">blog-post</span> <span class="attribute-name">title</span>=<span class="attribute-value">title</span><span class="inline-delimiter">}}</span></span>
+</pre></td>
+</tr></table>
+</div></div>
+<p>This will make the <code>title</code> property in the outer template scope
+available inside the component&#39;s template using the same name, <code>title</code>.</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/ufedet/3/embed?live">JS Bin</a>
+<script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>If, in the above example, the model&#39;s <code>title</code> property was instead
+called <code>name</code>, we would change the component usage to:</p>
+<div class="highlight  "><div class="ribbon"></div><div class="scroller"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+</pre></td>
+  <td class="code"><pre>{{blog-post title=name}}
+</pre></td>
+</tr></table>
+</div></div>
+<p><a class="jsbin-embed" href="http://jsbin.com/ufedet/4/embed?live">JS Bin</a>
+<script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>In other words, you are binding a named property from the outer scope to
+a named property in the component scope, with the syntax
+<code>componentProperty=outerProperty</code>.</p>
+
+<p>It is important to note that the value of these properties is bound.
+Whether you change the value on the model or inside the component, the
+values stay in sync. In the following example, type some text in the
+text field either in the outer template or inside the component and note
+how they stay in sync.</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/ufedet/5/embed?live">JS Bin</a>
+<script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+<p>You can also bind properties from inside an <code>{{#each}}</code> loop. This will
+create a component for each item and bind it to each model in the loop.</p>
+<div class="highlight handlebars "><div class="ribbon"></div><div class="scroller"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+</pre></td>
+  <td class="code"><pre><span class="inline"><span class="inline-delimiter">{{#</span><span class="attribute-name">each</span><span class="inline-delimiter">}}</span></span>
+  <span class="inline"><span class="inline-delimiter">{{</span><span class="attribute-name">blog-post</span> <span class="attribute-name">title</span>=<span class="attribute-value">title</span><span class="inline-delimiter">}}</span></span>
+<span class="inline"><span class="inline-delimiter">{{/</span><span class="attribute-name">each</span><span class="inline-delimiter">}}</span></span>
+</pre></td>
+</tr></table>
+</div></div>
+<p><a class="jsbin-embed" href="http://jsbin.com/ifuxey/2/embed?live">JS Bin</a>
+<script src="http://static.jsbin.com/js/embed.js"></script></p>
+
+    
+      <footer>
+        
+          <a class="previous-guide" href="defining-a-component.html">
+            ← Defining a Component
+          </a>
+         
+        <a class="next-guide" href="wrapping-content-in-a-component.html">
+          Wrapping Content in a Component →
+        </a>
+      
+      </footer>
+      
+  </div>
+
+  <script>
+    $(function(){
+      $("#toc-list .level-1 > a").click(function() {
+        $(this).parent().find('> ol').slideToggle(function() {
+          positionBackToTop(true);
+        });
+
+        return false;
+      });
+
+      $(function(){
+        $('.anchorable-toc').each(function(){
+          var toc = $(this),
+          id = toc.attr('id'),
+          href = "#" + id,
+          anchor = '<a class="toc-anchor" href="http://emberjs.com/guides/components/passing-properties-to-a-component/'+href+'"></a>';
+
+          toc.prepend(anchor);
+        });
+      });
+
+    });
+  </script>
+
+      </div>
+    </div>
+
+    <div id="footer">
+      <div id="footer-wrapper">
+        <div class="info">
+          Copyright 2013 <a href="http://tilde.io">Tilde Inc.</a><br>
+          Design by <a href="http://www.heropixel.com">HeroPixel</a></br>
+          <a href="../../team.html">Core Team</a> | <a href="../../sponsors.html">Project Sponsors</a>
+        </div>
+        <div class="statement">Ember.js is free, open source and always will be.</div>
+        <div class="links">
+          <a class="twitter" href="http://twitter.com/emberjs">Twitter</a>
+          <a class="github" href="https://github.com/emberjs/ember.js">GitHub</a>
+          <a class="googleplus" href="https://plus.google.com/communities/106387049790387471205">Google+</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

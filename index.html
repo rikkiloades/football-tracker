@@ -1,28 +1,141 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
 
         <title>Football tracker</title>
-
         <meta name="keywords" content="football, stats, analysing">
         <meta name="description" content="Explore and analyse a set of football match data.">
 
         <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <noscript>This site requires Javascript!</noscript>
 
-        <header>
-            <h1>Football tracker</h1>
-        </header>
+        <script type="text/x-handlebars">
+            <header>
+                <h1>FT</h1>
 
-        <p>Open the web inspector and look at the javascript console for output.</p>
+                <nav>
+                    <ul>
+                        <li>{{#linkTo 'matches'}}Matches{{/linkTo}}</li>
+                        <li>{{#linkTo 'players'}}Players{{/linkTo}}</li>
+                        <li>{{#linkTo 'stats'}}Stats{{/linkTo}}</li>
+                    </ul>
+                </nav>
+            </header>
 
-        <script src="js/third-party/lodash.js"></script>
-        <script src="js/third-party/jquery-2.0.3.js"></script>
-        <script src="matches.js"></script>
+            <section>
+                {{outlet}}
+            </section>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="matches">
+            <nav class="match-nav">
+                <ul>
+                    {{#each model}}
+                    <li>
+                        {{#linkTo 'match' this}}
+                            <span class="date">{{fxdate date}}</span>
+                            <span class="time">{{fxtime date}}</span>
+                        {{/linkTo}}
+                    </li>
+                    {{/each}}
+                </ul>
+            </nav>
+
+            <div class="match-details">
+                {{outlet}}
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="match">
+            <div class="match-team match-team-red">
+                <div class="match-teamname">{{teams.0.name}}</div>
+                <div class="match-score">{{teams.0.score}}</div>
+                <ul class="match-players">
+                    {{#each player in teams.0.players}}
+                    <li>{{player}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="match-team match-team-blue">
+                <div class="match-teamname">{{teams.1.name}}</div>
+                <div class="match-score">{{teams.1.score}}</div>
+                <ul class="match-players">
+                    {{#each player in teams.1.players}}
+                    <li>{{player}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="match-pitch">Pitch{{pitch}}</div>
+            <div class="match-weather">{{weather}}</div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="players">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Matches played</th>
+                    <th>Wins</th>
+                    <th>Draws</th>
+                    <th>Losses</th>
+                    <th>Points</th>
+                    <th>Points per game</th>
+                    <th>Win likelyhood</th>
+                    <th>Goals for</th>
+                    <th>Goals against</th>
+                    <th>Goals diff</th>
+                    <th>Goals per game</th>
+                </tr>
+                {{#each model}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{matches}}</td>
+                    <td>{{wins}}</td>
+                    <td>{{draws}}</td>
+                    <td>{{losses}}</td>
+                    <td>{{points}}</td>
+                    <td>{{fxround pointsPerGame}}</td>
+                    <td>{{fxpct winRatio}}</td>
+                    <td>{{goalsFor}}</td>
+                    <td>{{goalsAgainst}}</td>
+                    <td>{{goalsDiff}}</td>
+                    <td>{{fxround goalsPerGame}}</td>
+                </tr>
+                {{/each}}
+            </table>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="stats">
+            <div class="stat">
+                <div class="stat-label">Most wins:</div>
+                <div class="stat-value">{{mostWins.name}} <span class="stat-value-detail">({{mostWins.wins}})</span></div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Most losses:</div>
+                <div class="stat-value">{{mostLosses.name}} <span class="stat-value-detail">({{mostLosses.losses}})</span></div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Most draws:</div>
+                <div class="stat-value">{{mostDraws.name}} <span class="stat-value-detail">({{mostDraws.draws}})</span></div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Best goal diff:</div>
+                <div class="stat-value">{{bestGoalDiff.name}} <span class="stat-value-detail">({{bestGoalDiff.goalsDiff}})</span></div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Wost goal diff:</div>
+                <div class="stat-value">{{worstGoalDiff.name}} <span class="stat-value-detail">({{worstGoalDiff.goalsDiff}})</span></div>
+            </div>
+        </script>
+
+        <script src="js/libs/jquery-1.9.1.js"></script>
+        <script src="js/libs/handlebars-1.0.0.js"></script>
+        <script src="js/libs/ember-1.0.0.js"></script>
+        <script src="js/libs/moment.js"></script>
         <script src="js/app.js"></script>
+        <script src="matches.js"></script>
     </body>
 </html>
