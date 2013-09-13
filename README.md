@@ -5,6 +5,8 @@ Keeps track of stats surrounding football matches and provides UI and tools for 
 
 It is a single-page browser app.
 
+[View app](http://rikkiloades.github.io/football-tracker)
+
 Installing
 =============
 
