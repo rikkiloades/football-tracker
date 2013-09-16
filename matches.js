@@ -281,8 +281,8 @@ App.matches = [
 					"Rob",
 					"Danny",
 					"Emma",
-					"John",
-					"Glen"
+					"John (Mr X)",
+					"Sam (Mr Z)"
 				]
 			},
 			{
