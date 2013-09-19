@@ -59,7 +59,7 @@ App = Ember.Application.create({
 		});
 
 		for (var i in players ) {
-			this.players.push(players[i]);
+			this.players.unshift(players[i]);
 		}
 	}
 });
@@ -108,6 +108,14 @@ App.MatchesRoute = Ember.Route.extend({
 	model: function() {
 		return App.matches;
 	}
+});
+
+App.MatchesIndexRoute = Ember.Route.extend({
+  redirect: function () {
+    var firstItem = this.modelFor('matches').get('lastObject');
+    console.log(firstItem);
+    this.replaceWith('match', firstItem);
+  }
 });
 
 App.MatchRoute = Ember.Route.extend({
@@ -217,7 +225,7 @@ Ember.Handlebars.helper('fxdate', function(value, options) {
 });
 
 Ember.Handlebars.helper('fxtime', function(value, options) {
-	return moment(value, 'YYYY-MM-DD HH:mm:ss').format('HH:MM');
+	return moment(value, 'YYYY-MM-DD HH:mm:ss').format('HH:mm');
 });
 
 Ember.Handlebars.helper('fxpct', function(value, options) {

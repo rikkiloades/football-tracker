@@ -7,15 +7,17 @@
         <meta name="keywords" content="football, stats, analysing">
         <meta name="description" content="Explore and analyse a set of football match data.">
 
-        <link href='http://fonts.googleapis.com/css?family=Voces' rel='stylesheet' type='text/css'>
+        <link href="http://fonts.googleapis.com/css?family=Voces" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
+
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     </head>
     <body>
 
         <script type="text/x-handlebars">
-            <header>
-                <h1>FT</h1>
+            <header class="primary-nav">
+                <img src="img/icon.png" width="64" height="64" alt="Football Tracker">
 
                 <nav>
                     <ul>
@@ -26,7 +28,7 @@
                 </nav>
             </header>
 
-            <section>
+            <section class="content">
                 {{outlet}}
             </section>
         </script>
@@ -37,40 +39,40 @@
                     {{#each model}}
                     <li>
                         {{#linkTo 'match' this}}
-                            <span class="date">{{fxdate date}}</span>
-                            <span class="time">{{fxtime date}}</span>
+                            <span class="match-date">{{fxdate date}}</span>
+                            <span class="team-name-home">{{teams.0.name}}</span>
+                            <span class="score">{{teams.0.score}} - {{teams.1.score}}</span>
+                            <span class="team-name-away">{{teams.1.name}}</span>
                         {{/linkTo}}
                     </li>
                     {{/each}}
                 </ul>
             </nav>
 
-            <div class="match-details">
+            <div class="match">
                 {{outlet}}
             </div>
         </script>
 
         <script type="text/x-handlebars" data-template-name="match">
-            <div class="match-team match-team-red">
+            <div class="match-team-home">
                 <div class="match-teamname">{{teams.0.name}}</div>
-                <div class="match-score">{{teams.0.score}}</div>
+                <div class="match-result-home">{{teams.0.score}}</div>
                 <ul class="match-players">
                     {{#each player in teams.0.players}}
                     <li>{{player}}</li>
                     {{/each}}
                 </ul>
             </div>
-            <div class="match-team match-team-blue">
+            <div class="match-team-away">
                 <div class="match-teamname">{{teams.1.name}}</div>
-                <div class="match-score">{{teams.1.score}}</div>
+                <div class="match-result-away">{{teams.1.score}}</div>
                 <ul class="match-players">
                     {{#each player in teams.1.players}}
                     <li>{{player}}</li>
                     {{/each}}
                 </ul>
             </div>
-            <div class="match-pitch">Pitch{{pitch}}</div>
-            <div class="match-weather">{{weather}}</div>
         </script>
 
         <script type="text/x-handlebars" data-template-name="players">

@@ -25,7 +25,7 @@ App.matches = [
 					"Rikki",
 					"Darren",
 					"Rob",
-					"Dan",
+					"Dan Wood",
 					"Cedric",
 					"Alex"
 				]
@@ -44,7 +44,7 @@ App.matches = [
 				"players": [
 					"Ady",
 					"Darren",
-					"Dan",
+					"Dan Wood",
 					"Josh",
 					"Kirstie"
 				]
@@ -73,7 +73,7 @@ App.matches = [
 				"score": 25,
 				"players": [
 					"Rikki",
-					"Dan",
+					"Dan Wood",
 					"Lewis",
 					"Emma",
 					"Jason"
@@ -103,7 +103,7 @@ App.matches = [
 				"score": 4,
 				"players": [
 					"Rikki",
-					"Dan",
+					"Dan Wood",
 					"Ruben",
 					"Emma",
 					"Jason"
@@ -134,7 +134,7 @@ App.matches = [
 				"players": [
 					"Rikki",
 					"Darren",
-					"Dan",
+					"Dan Wood",
 					"Ruben",
 					"Danny"
 				]
@@ -166,7 +166,7 @@ App.matches = [
 					"Josh",
 					"Darren",
 					"Danny",
-					"Dan"
+					"Dan Wood"
 				]
 			},
 			{
@@ -221,7 +221,7 @@ App.matches = [
 				"players": [
 					"Rob",
 					"Emma",
-					"Dan",
+					"Dan Wood",
 					"Cedric"
 				]
 			},
@@ -261,7 +261,7 @@ App.matches = [
 					"Darren",
 					"Stephen",
 					"Danny",
-					"Dan",
+					"Dan Wood",
 					"Kirstie"
 				]
 			}
@@ -290,7 +290,7 @@ App.matches = [
 				"score": 6,
 				"players": [
 					"Josh",
-					"Dan",
+					"Dan Wood",
 					"Jason",
 					"Ruben",
 					"Kirstie",

@@ -10,20 +10,31 @@ html, body {
     background:#333;
 }
 
-header {
+img {
+	margin:16px;
+}
+
+.ember-view {
+	width:100%;
+	height:100%;
+}
+
+.primary-nav {
 	color:#fff;
 	height:100%;
-	width:150px;
+	width:96px;
 	position:absolute;
 	left:0;
 	top:0;
 }
 
-section {
-	margin-left:150px;
+.content {
+	margin-left:96px;
 	border-radius:3px;
 	background:#fff;
 	overflow:auto;
+	box-sizing:border-box;
+	height:100%;
 }
 
 a, a:visited, a:active {
@@ -36,25 +47,26 @@ a.active {
 	background:#09f;
 }
 
-nav > ul {
+.primary-nav ul {
 	display:block;
 }
 
-nav > ul > li {
+.primary-nav ul > li {
 	list-style-type:none;
 	display:block;
 }
 
-nav > ul > li > a {
+.primary-nav ul > li > a {
 	display:block;
-	padding:3px 6px;
+	padding:8px 16px;
+	text-align:right;
 }
 
 .stat {
 	background:#ccc;
-	padding:10px;
-	margin:20px;
-	border-radius:3px;
+	padding:8px;
+	margin:16px;
+	border-radius:4px;
 	box-sizing:border-box;
 	width:25%;
 	display:inline-block;
@@ -66,12 +78,12 @@ nav > ul > li > a {
 }
 
 .stat-value {
-	font-size:40px;
+	font-size:64px;
 	color:#333;
 }
 
 .stat-value-detail {
-	font-size:24px;
+	font-size:16px;
 	color:#999;
 }
 
@@ -87,7 +99,7 @@ table th {
 	padding:5px 10px;
 	color:#666;
 	text-align:right;
-	font-size:12px;
+	font-size:8px;
 	text-transform:uppercase;
 }
 
@@ -100,13 +112,16 @@ table td {
 	padding:5px 10px;
 	border-top:1px solid #ccc;
 	color:#333;
-	font-size:24px;
+	font-size:16px;
 }
 
 .match-nav {
-	width:25%;
+	height:100%;
+	width:30%;
 	box-sizing:border-box;
 	float:left;
+	overflow-y:scroll;
+	border-right:1px solid #ccc;
 }
 
 .match-nav > ul {
@@ -133,41 +148,94 @@ table td {
 .match-nav > ul > li > a {
 	display:block;
 	padding:5px 10px;
+	overflow:hidden;
 }
 
-.match-details {
-	width:75%;
+.match-date {
+	display:block;
+	font-size:10px;
+	line-height:1.5;
+	text-align:center;
+}
+.team-name-home,
+.team-name-away {
+	display:block;
+	float:left;
+	width:40%;
+	font-size:12px;
+	line-height:24px;
+}
+.team-name-home {
+	text-align:right;
+}
+.score {
+	display:block;
+	float:left;
+	text-align:center;
+	width:20%;
+	font-weight:bold;
+	font-size:16px;
+	line-height:24px;
+}
+
+.match {
+	width:70%;
+	height:100%;
 	box-sizing:border-box;
 	float:right;
+	position:relative;
 }
 
-.match-team {
-	padding:10px;
-	border-left:1px solid #ccc;
+.match-team-home,
+.match-team-away {
 	box-sizing:border-box;
 	width:50%;
-	padding:10px;
-	display:inline-block;
-}
-
-.match-team-red {
+	display:block;
 	float:left;
-	border-top:5px solid #900;
+	padding:16px;
+	position:relative;
+	height:100%;
 }
 
-.match-team-blue {
+.match-team-home {
+	border-top:5px solid #900;
+	text-align:left;
+	padding-right:48px;
+	background:#FFE5E5;
+}
+
+.match-team-away {
 	float:right;
 	border-top:5px solid #009;
+	text-align:right;
+	background:#E5E5FF;
 }
 
 .match-teamname {
-	font-size:40px;
+	font-size:32px;
 	color:#333;
 }
 
-.match-score {
+.match-result-home,
+.match-result-away {
 	font-size:24px;
 	color:#999;
+	position:absolute;
+	top:0;
+	color:#fff;
+	font-size:32px;
+	padding:8px;
+	width:40px;
+}
+
+.match-result-home {
+	right:0;
+	background:#900;
+}
+
+.match-result-away {
+	left:0;
+	background:#009;
 }
 
 .match-players {
@@ -177,15 +245,4 @@ table td {
 
 .match-players > li {
 	list-style-type:none;
-}
-
-.match-weather,
-.match-pitch {
-	clear:both;
-	background:#ccc;
-	color:#333;
-	padding:10px;
-	border-radius:3px;
-	display:inline-block;
-	margin:10px;
 }
