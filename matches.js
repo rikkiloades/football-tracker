@@ -307,9 +307,9 @@ App.matches = [
 		"teams": [
 			{
 				"name": "Red",
-				"score": 0,
+				"score": 21,
 				"players": [
-					"Sam (Mr Z)",
+					"John (Mr X)",
 					"Rikki",
 					"Dan Wood",
 					"Kirstie"
@@ -317,9 +317,9 @@ App.matches = [
 			},
 			{
 				"name": "Blue",
-				"score": 0,
+				"score": 22,
 				"players": [
-					"John (Mr X)"
+					"Sam (Mr Z)"
 					"Rob",
 					"Ruben",
 					"Danny P"
