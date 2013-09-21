@@ -319,7 +319,7 @@ App.matches = [
 				"name": "Blue",
 				"score": 22,
 				"players": [
-					"Sam (Mr Z)"
+					"Sam (Mr Z)",
 					"Rob",
 					"Ruben",
 					"Danny P"
