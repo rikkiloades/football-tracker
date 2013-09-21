@@ -218,14 +218,14 @@ table td {
 
 .match-result-home,
 .match-result-away {
-	font-size:24px;
 	color:#999;
 	position:absolute;
 	top:0;
 	color:#fff;
-	font-size:32px;
+	font-size:48px;
 	padding:8px;
-	width:40px;
+	width:96px;
+	text-align:center;
 }
 
 .match-result-home {
