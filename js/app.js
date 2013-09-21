@@ -171,54 +171,6 @@ App.StatsController = Ember.ObjectController.extend({
 	// played together the most
 	// player counts per match over time
 
-	mostWins: function() {
-		var mostWins = null;
-		App.get('players').forEach(function(player) {
-			if (mostWins === null) {
-				mostWins = player;
-				return;
-			}
-
-			if (mostWins.get('wins') < player.get('wins')) {
-				mostWins = player;
-			}
-		});
-
-		return mostWins;
-	}.property('App.players.@each.wins'),
-
-	mostDraws: function() {
-		var mostDraws = null;
-		App.get('players').forEach(function(player) {
-			if (mostDraws === null) {
-				mostDraws = player;
-				return;
-			}
-
-			if (mostDraws.get('draws') < player.get('draws')) {
-				mostDraws = player;
-			}
-		});
-
-		return mostDraws;
-	}.property('App.players.@each.draws'),
-
-	mostLosses: function() {
-		var mostLosses = null;
-		App.get('players').forEach(function(player) {
-			if (mostLosses === null) {
-				mostLosses = player;
-				return;
-			}
-
-			if (mostLosses.get('losses') < player.get('losses')) {
-				mostLosses = player;
-			}
-		});
-
-		return mostLosses;
-	}.property('App.players.@each.losses'),
-
 	bestGoalDiff: function() {
 		var bestGoalDiff = null;
 		App.get('players').forEach(function(player) {
