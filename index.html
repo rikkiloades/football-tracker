@@ -84,12 +84,11 @@
                     <th>Draws</th>
                     <th>Losses</th>
                     <th>Points</th>
-                    <th>Points per game</th>
-                    <th>Win likelyhood</th>
                     <th>Goals for</th>
                     <th>Goals against</th>
                     <th>Goals diff</th>
                     <th>Goals per game</th>
+                    <th class="lastFiveResults">Last five results</th>
                 </tr>
                 {{#each model}}
                 <tr>
@@ -99,12 +98,15 @@
                     <td>{{draws}}</td>
                     <td>{{losses}}</td>
                     <td>{{points}}</td>
-                    <td>{{fxround pointsPerGame}}</td>
-                    <td>{{fxpct winRatio}}</td>
                     <td>{{goalsFor}}</td>
                     <td>{{goalsAgainst}}</td>
                     <td>{{goalsDiff}}</td>
                     <td>{{fxround goalsPerGame}}</td>
+                    <td class="lastFiveResults">
+                        {{#each lastFiveResults}}
+                            <span {{bindAttr class=":result this"}}>{{this}}</span>
+                        {{/each}}
+                    </td>
                 </tr>
                 {{/each}}
             </table>

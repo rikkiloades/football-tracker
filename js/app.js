@@ -13,7 +13,12 @@ App = Ember.Application.create({
 				return players[name];
 			}
 
-			var newPlayer = App.Player.create({name: name});
+			var newPlayer = App.Player.create({
+				name: name,
+				results: [],
+				goalsFor: 0,
+				goalsAgainst: 0
+			});
 
 			players[name] = newPlayer;
 
@@ -21,39 +26,37 @@ App = Ember.Application.create({
 		}
 
 		this.matches.forEach(function(match) {
-			match.teams[0].players.forEach(function(player) {
-				var player = getPlayer(player);
+			match.teams[0].players.forEach(function(playerName) {
+				var player = getPlayer(playerName);
 
-				player.goalsFor += match.teams[0].score;
-				player.goalsAgainst += match.teams[1].score;
-				player.matches++;
-
+				player.incrementProperty('goalsFor', match.teams[0].score);
+				player.incrementProperty('goalsAgainst', match.teams[1].score);
+				
 				if (match.teams[0].score > match.teams[1].score) {
-					player.wins++;
+					player.get('results').push('win');
 				}
 				else if (match.teams[0].score < match.teams[1].score) {
-					player.losses++;
+					player.get('results').push('loss');
 				}
 				else {
-					player.draws++;
+					player.get('results').push('draw');
 				}
 			});
 
 			match.teams[1].players.forEach(function(player) {
 				var player = getPlayer(player);
 
-				player.goalsFor += match.teams[0].score;
-				player.goalsAgainst += match.teams[1].score;
-				player.matches++;
-
-				if (match.teams[0].score > match.teams[1].score) {
-					player.wins++;
+				player.incrementProperty('goalsFor', match.teams[1].score);
+				player.incrementProperty('goalsAgainst', match.teams[0].score);
+				
+				if (match.teams[1].score > match.teams[0].score) {
+					player.get('results').push('win');
 				}
-				else if (match.teams[0].score < match.teams[1].score) {
-					player.losses++;
+				else if (match.teams[1].score < match.teams[0].score) {
+					player.get('results').push('loss');
 				}
 				else {
-					player.draws++;
+					player.get('results').push('draw');
 				}
 			});
 		});
@@ -65,11 +68,42 @@ App = Ember.Application.create({
 });
 
 App.Player = Ember.Object.extend({
-	name: '',
-	matches: 0,
-	wins: 0,
-	losses: 0,
-	draws: 0,
+	lastFiveResults: function() {
+		return this.get('results').slice(-5);
+	}.property('results'),
+	matches: function() {
+		return this.get('results').length;
+	}.property('results'),
+	wins: function() {
+		var wins = 0;
+		this.get('results').forEach(function(result) {
+			if (result == 'win') {
+				wins++;
+			}
+		});
+
+		return wins;
+	}.property('results'),
+	losses: function() {
+		var losses = 0;
+		this.get('results').forEach(function(result) {
+			if (result == 'loss') {
+				losses++;
+			}
+		});
+
+		return losses;
+	}.property('results'),
+	draws: function() {
+		var draws = 0;
+		this.get('results').forEach(function(result) {
+			if (result == 'draw') {
+				draws++;
+			}
+		});
+
+		return draws;
+	}.property('results'),
 	points: function() {
 		var points = 0;
 
@@ -78,14 +112,6 @@ App.Player = Ember.Object.extend({
 
 		return points;
 	}.property('wins', 'draws'),
-	pointsPerGame: function() {
-		return this.get('points') / this.get('matches');
-	}.property('matches', 'points'),
-	winRatio: function() {
-		return this.get('wins') / this.get('matches');
-	}.property('matches', 'wins'),
-	goalsFor: 0,
-	goalsAgainst: 0,
 	goalsDiff: function() {
 		return this.get('goalsFor') - this.get('goalsAgainst');
 	}.property('goalsFor', 'goalsAgainst'),
@@ -139,6 +165,12 @@ App.PlayerRoute = Ember.Route.extend({
 });
 
 App.StatsController = Ember.ObjectController.extend({
+	// plays per month per player, graphed (punchcard)
+	// score graphed over time
+	// home vs away scores graphed
+	// played together the most
+	// player counts per match over time
+
 	mostWins: function() {
 		var mostWins = null;
 		App.get('players').forEach(function(player) {

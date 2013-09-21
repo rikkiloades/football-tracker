@@ -115,6 +115,10 @@ table td {
 	font-size:16px;
 }
 
+table .lastFiveResults {
+	text-align:left;
+}
+
 .match-nav {
 	height:100%;
 	width:30%;
@@ -245,4 +249,26 @@ table td {
 
 .match-players > li {
 	list-style-type:none;
+}
+
+.result {
+	display:inline-block;
+	width:8px;
+	height:8px;
+	margin:8px 0 8px 8px;
+	overflow:hidden;
+	text-indent:-999px;
+	position:relative;
+}
+
+.result.win {
+	background:#090;
+}
+
+.result.loss {
+	background:#900;
+}
+
+.result.draw {
+	background:#999;
 }
