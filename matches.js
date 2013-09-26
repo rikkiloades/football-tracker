@@ -2,7 +2,7 @@ App.matches = [
   {
   		"id": 1,
 		"date": "2013-07-10 18:00:00",
-		"pitch": 7,
+		"pitch": "7",
 		"weather": "hot",
 		"teams": [
 			{
@@ -33,9 +33,9 @@ App.matches = [
 		]
 	},
 	{
-		"id": 2,
+		"id": "2",
 		"date": "2013-07-13 17:00:00",
-		"pitch": 6,
+		"pitch": "6",
 		"weather": "hot",
 		"teams": [
 			{
@@ -65,7 +65,7 @@ App.matches = [
 	{
 		"id": 3,
 		"date": "2013-07-26 18:00:00",
-		"pitch": 5,
+		"pitch": "5",
 		"weather": "hot",
 		"teams": [
 			{
@@ -95,7 +95,7 @@ App.matches = [
 	{
 		"id": 4,
 		"date": "2013-08-02 18:00:00",
-		"pitch": 5,
+		"pitch": "5",
 		"weather": "mild",
 		"teams": [
 			{
@@ -125,7 +125,7 @@ App.matches = [
 	{
 		"id": 5,
 		"date": "2013-08-09 18:00:00",
-		"pitch": 5,
+		"pitch": "5",
 		"weather": "mild",
 		"teams": [
 			{
@@ -155,7 +155,7 @@ App.matches = [
 	{
 		"id": 6,
 		"date": "2013-08-11 17:00:00",
-		"pitch": 5,
+		"pitch": "5",
 		"weather": "mild",
 		"teams": [
 			{
@@ -185,7 +185,7 @@ App.matches = [
 	{
 		"id": 7,
 		"date": "2013-08-14 18:00:00",
-		"pitch": 2,
+		"pitch": "2",
 		"weather": "mild",
 		"teams": [
 			{
@@ -212,7 +212,7 @@ App.matches = [
 	{
 		"id": 8,
 		"date": "2013-08-30 18:00:00",
-		"pitch": 2,
+		"pitch": "2",
 		"weather": "mild",
 		"teams": [
 			{
@@ -240,7 +240,7 @@ App.matches = [
 	{
 		"id": 9,
 		"date": "2013-09-06 18:00:00",
-		"pitch": 1,
+		"pitch": "1",
 		"weather": "mild",
 		"teams": [
 			{
@@ -270,7 +270,7 @@ App.matches = [
 	{
 		"id": 10,
 		"date": "2013-09-13 18:00:00",
-		"pitch": 5,
+		"pitch": "5",
 		"weather": "mild",
 		"teams": [
 			{
@@ -302,7 +302,7 @@ App.matches = [
 	{
 		"id": 11,
 		"date": "2013-09-20 18:00:00",
-		"pitch": 1,
+		"pitch": "1",
 		"weather": "mild",
 		"teams": [
 			{
@@ -323,6 +323,37 @@ App.matches = [
 					"Rob",
 					"Ruben",
 					"Danny P"
+				]
+			}
+		]
+	},
+	{
+		"id": 12,
+		"date": "2013-09-25 18:00:00",
+		"pitch": "E",
+		"weather": "mild",
+		"teams": [
+			{
+				"name": "Delta Killers",
+				"score": 3,
+				"players": [
+					"Sam (Mr Z)",
+					"Rikki",
+					"Dan Wood",
+					"Kirstie",
+					"Josh"
+				]
+			},
+			{
+				"name": "Chaotic Mudsharks",
+				"score": 3,
+				"players": [
+					"John (Mr X)",
+					"Rob",
+					"Ruben",
+					"Emma",
+					"Danny P",
+					"Cedric"
 				]
 			}
 		]
