@@ -165,12 +165,6 @@ App.PlayerRoute = Ember.Route.extend({
 });
 
 App.StatsController = Ember.ObjectController.extend({
-	// plays per month per player, graphed (punchcard)
-	// score graphed over time
-	// home vs away scores graphed
-	// played together the most
-	// player counts per match over time
-
 	bestGoalDiff: function() {
 		var bestGoalDiff = null;
 		App.get('players').forEach(function(player) {
