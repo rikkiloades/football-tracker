@@ -165,7 +165,7 @@ App.matches = [
 					"Rikki",
 					"Josh",
 					"Darren",
-					"Danny",
+					"Danny P",
 					"Dan Wood"
 				]
 			},
