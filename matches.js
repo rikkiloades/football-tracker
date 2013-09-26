@@ -335,7 +335,7 @@ App.matches = [
 		"teams": [
 			{
 				"name": "Delta Killers",
-				"score": 0,
+				"score": 3,
 				"players": [
 					"Sam (Mr Z)",
 					"Rikki",
@@ -346,7 +346,7 @@ App.matches = [
 			},
 			{
 				"name": "Chaotic Mudsharks",
-				"score": 0,
+				"score": 3,
 				"players": [
 					"John (Mr X)",
 					"Rob",
