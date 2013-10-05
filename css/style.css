@@ -99,7 +99,7 @@ table th {
 	padding:5px 10px;
 	color:#666;
 	text-align:right;
-	font-size:8px;
+	font-size:10px;
 	text-transform:uppercase;
 }
 
@@ -271,4 +271,18 @@ table .lastFiveResults {
 
 .result.draw {
 	background:#999;
+}
+
+.sort {
+	cursor:pointer;
+}
+
+.sort:hover,
+.sort.active {
+	color:#09f;
+}
+
+.sort.active:after {
+	content:'▼';
+	padding-left:4px;
 }
