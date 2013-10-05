@@ -13,7 +13,6 @@ Below is a collection of improvements to the app which are being considered.
 # Matches
 
 - Way of visually grouping games together by each month
-- Reverse sort the matches so the most recent is at the top
 - Support for upcoming match fixtures (don't count towards stats but are displayed in match listing with no score and kick off time, pitch)
 
 # Players

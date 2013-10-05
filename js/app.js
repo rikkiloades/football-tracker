@@ -136,11 +136,16 @@ App.MatchesRoute = Ember.Route.extend({
 	}
 });
 
+App.MatchesController = Ember.ArrayController.extend({
+	sortProperties: ['date'],
+	sortAscending: false
+});
+
 App.MatchesIndexRoute = Ember.Route.extend({
   redirect: function () {
-    var firstItem = this.modelFor('matches').get('lastObject');
-    console.log(firstItem);
-    this.replaceWith('match', firstItem);
+    var latestItem = this.modelFor('matches').get('lastObject');
+    
+    this.replaceWith('match', latestItem);
   }
 });
 
