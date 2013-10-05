@@ -114,10 +114,7 @@ App.Player = Ember.Object.extend({
 	}.property('wins', 'draws'),
 	goalsDiff: function() {
 		return this.get('goalsFor') - this.get('goalsAgainst');
-	}.property('goalsFor', 'goalsAgainst'),
-	goalsPerGame: function() {
-		return this.get('goalsFor') / this.get('matches');
-	}.property('matches', 'goalsFor')
+	}.property('goalsFor', 'goalsAgainst')
 });
 
 App.Router.map(function() {
@@ -171,8 +168,7 @@ App.PlayersController = Ember.ArrayController.extend({
 		points: true,
 		goalsFor: false,
 		goalsAgainst: false,
-		goalsDiff: false,
-		goalsPerGame: false
+		goalsDiff: false
 	},
 	sortProperties: ['points'],
 	sortAscending: false,

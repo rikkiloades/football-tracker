@@ -87,7 +87,6 @@
                     <th><span {{bindAttr class=":sort sortColumns.goalsFor:active"}} {{action "sort" "goalsFor"}}>Goals for</span></th>
                     <th><span {{bindAttr class=":sort sortColumns.goalsAgainst:active"}} {{action "sort" "goalsAgainst"}}>Goals against</span></th>
                     <th><span {{bindAttr class=":sort sortColumns.goalsDiff:active"}} {{action "sort" "goalsDiff"}}>Goals diff</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.goalsPerGame:active"}} {{action "sort" "goalsPerGame"}}>Goals per game</span></th>
                     <th class="lastFiveResults">Last five results</th>
                 </tr>
                 {{#each arrangedContent}}
@@ -101,10 +100,9 @@
                     <td>{{goalsFor}}</td>
                     <td>{{goalsAgainst}}</td>
                     <td>{{goalsDiff}}</td>
-                    <td>{{fxround goalsPerGame}}</td>
                     <td class="lastFiveResults">
                         {{#each lastFiveResults}}
-                            <span {{bindAttr class=":result this"}}>{{this}}</span>
+                            <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
                         {{/each}}
                     </td>
                 </tr>

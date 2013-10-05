@@ -17,7 +17,6 @@ Below is a collection of improvements to the app which are being considered.
 
 # Players
 
-- Sort by matches played
 - Filters for played in the last X matches
 - People who havent played recently drop off the list
 - Player statistics details page containing some graphs and charts about their recent games
