@@ -79,18 +79,18 @@
             <table>
                 <tr>
                     <th>Name</th>
-                    <th>Matches played</th>
-                    <th>Wins</th>
-                    <th>Draws</th>
-                    <th>Losses</th>
-                    <th>Points</th>
-                    <th>Goals for</th>
-                    <th>Goals against</th>
-                    <th>Goals diff</th>
-                    <th>Goals per game</th>
+                    <th><span {{bindAttr class=":sort sortColumns.matches:active"}} {{action "sort" "matches"}}>Matches played</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.wins:active"}} {{action "sort" "wins"}}>Wins</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.draws:active"}} {{action "sort" "draws"}}>Draws</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.losses:active"}} {{action "sort" "losses"}}>Losses</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.points:active"}} {{action "sort" "points"}}>Points</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.goalsFor:active"}} {{action "sort" "goalsFor"}}>Goals for</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.goalsAgainst:active"}} {{action "sort" "goalsAgainst"}}>Goals against</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.goalsDiff:active"}} {{action "sort" "goalsDiff"}}>Goals diff</span></th>
+                    <th><span {{bindAttr class=":sort sortColumns.goalsPerGame:active"}} {{action "sort" "goalsPerGame"}}>Goals per game</span></th>
                     <th class="lastFiveResults">Last five results</th>
                 </tr>
-                {{#each model}}
+                {{#each arrangedContent}}
                 <tr>
                     <td>{{name}}</td>
                     <td>{{matches}}</td>

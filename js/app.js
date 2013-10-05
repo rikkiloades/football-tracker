@@ -162,6 +162,35 @@ App.PlayersRoute = Ember.Route.extend({
 	}
 });
 
+App.PlayersController = Ember.ArrayController.extend({
+	sortColumns: {
+		matches: false,
+		wins: false,
+		draws: false,
+		losses: false,
+		points: true,
+		goalsFor: false,
+		goalsAgainst: false,
+		goalsDiff: false,
+		goalsPerGame: false
+	},
+	sortProperties: ['points'],
+	sortAscending: false,
+	actions: {
+		sort: function(property) {
+			for (var col in this.get('sortColumns')) {
+				if (col == property) {
+					this.set('sortColumns.' + col, true);
+					this.set('sortProperties', [col]);
+				}
+				else {
+					this.set('sortColumns.' + col, false);
+				}
+			}
+		}
+	}
+});
+
 App.PlayerRoute = Ember.Route.extend({
 	model: function(params) {
 		var match = Ember.A(App.players).findBy('id', parseInt(params.player_id));
