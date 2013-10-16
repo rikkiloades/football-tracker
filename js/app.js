@@ -25,7 +25,10 @@ App = Ember.Application.create({
 			return newPlayer;
 		}
 
-		this.matches.forEach(function(match) {
+		this.get('matches').forEach(function(match) {
+			match.goals = match.teams[0].score + match.teams[1].score;
+			match.winningGoalDiff = Math.abs(match.teams[0].score - match.teams[1].score);
+
 			match.teams[0].players.forEach(function(playerName) {
 				var player = getPlayer(playerName);
 
@@ -68,6 +71,9 @@ App = Ember.Application.create({
 });
 
 App.Player = Ember.Object.extend({
+	urlSlug: function() {
+		return this.get('name').toLowerCase().replace(/\s/g, '-').replace(/[^a-z\-]+/ig, '');
+	}.property('name'),
 	lastFiveResults: function() {
 		return this.get('results').slice(-5);
 	}.property('results'),
@@ -122,9 +128,13 @@ App.Router.map(function() {
  		this.resource('match', {path: '/matches/:match_id'});
  	});
 
- 	this.resource('players');
+ 	this.resource('players', function() {
+ 		this.resource('player', {path: '/:player_url_slug'});
+ 	});
 
- 	this.resource('stats');
+ 	this.route('table');
+
+ 	this.route('stats');
 });
 
 App.MatchesRoute = Ember.Route.extend({
@@ -139,11 +149,10 @@ App.MatchesController = Ember.ArrayController.extend({
 });
 
 App.MatchesIndexRoute = Ember.Route.extend({
-  redirect: function () {
-    var latestItem = this.modelFor('matches').get('lastObject');
-    
-    this.replaceWith('match', latestItem);
-  }
+	redirect: function () {
+		var latestItem = this.modelFor('matches').get('lastObject');
+		this.replaceWith('match', latestItem);
+	}
 });
 
 App.MatchRoute = Ember.Route.extend({
@@ -189,7 +198,7 @@ App.PlayersController = Ember.ArrayController.extend({
 
 App.PlayerRoute = Ember.Route.extend({
 	model: function(params) {
-		var match = Ember.A(App.players).findBy('id', parseInt(params.player_id));
+		var match = this.modelFor('players').findBy('urlSlug', params.player_url_slug);
 		return match;
 	}
 });
@@ -225,7 +234,93 @@ App.StatsController = Ember.ObjectController.extend({
 		});
 
 		return worstGoalDiff;
-	}.property('App.players.@each.goalsDiff')
+	}.property('App.players.@each.goalsDiff'),
+
+	goalsOverTime: function() {
+		var matchGoals = [];
+		
+		App.get('matches').forEach(function(match) {
+			matchGoals.push({
+				x: match.date.substr(5, 5),
+				y: match.goals
+			});
+		});
+
+		return matchGoals;
+	}.property('App.matches.@each.goals'),
+
+	goalsDiffOverTime: function() {
+		var matchGoals = [];
+		
+		App.get('matches').forEach(function(match) {
+			matchGoals.push({
+				x: match.date.substr(5, 5),
+				y: match.winningGoalDiff
+			});
+		});
+
+		return matchGoals;
+	}.property('App.matches.@each.goals')
+});
+
+App.BarChartComponent = Ember.Component.extend({
+	tagName: 'div',
+	attributeBindings:['style'],
+	style: function() {
+		return 'width:' + this.get('width') + 'px;height:' + this.get('height') + 'px;';
+	}.property('width', 'height'),
+	width: 400,
+	height: 300,
+	chart: null,
+	xScale: 'ordinal',
+	yScale: 'linear',
+	
+	didInsertElement: function() {
+		var data = {
+			xScale: this.get('xScale'),
+			yScale: this.get('yScale'),
+			type: 'bar',
+			main: [
+				{
+					className: this.get('elementId'),
+			 		data: this.get('data')
+			 	}
+			]
+		};
+
+		var chart = new xChart('bar', data, '#' + this.get('elementId'));
+		this.set('chart', chart);
+	}
+});
+
+App.LineChartComponent = Ember.Component.extend({
+	tagName: 'div',
+	attributeBindings:['style'],
+	style: function() {
+		return 'width:' + this.get('width') + 'px;height:' + this.get('height') + 'px;';
+	}.property('width', 'height'),
+	width: 400,
+	height: 300,
+	chart: null,
+	xScale: 'ordinal',
+	yScale: 'linear',
+	
+	didInsertElement: function() {
+		var data = {
+			xScale: this.get('xScale'),
+			yScale: this.get('yScale'),
+			type: 'line-dotted',
+			main: [
+				{
+					className: this.get('elementId'),
+			 		data: this.get('data')
+			 	}
+			]
+		};
+
+		var chart = new xChart('line-dotted', data, '#' + this.get('elementId'));
+		this.set('chart', chart);
+	}
 });
 
 Ember.Handlebars.helper('fxdate', function(value, options) {
