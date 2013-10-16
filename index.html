@@ -9,6 +9,7 @@
 
         <link href="http://fonts.googleapis.com/css?family=Voces" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/xcharts.css">
         <link rel="stylesheet" href="css/style.css">
 
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -34,7 +35,7 @@
         </script>
 
         <script type="text/x-handlebars" data-template-name="matches">
-            <nav class="match-nav">
+            <nav class="nav">
                 <ul>
                     {{#each arrangedContent}}
                     <li>
@@ -76,38 +77,54 @@
         </script>
 
         <script type="text/x-handlebars" data-template-name="players">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th><span {{bindAttr class=":sort sortColumns.matches:active"}} {{action "sort" "matches"}}>Matches played</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.wins:active"}} {{action "sort" "wins"}}>Wins</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.draws:active"}} {{action "sort" "draws"}}>Draws</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.losses:active"}} {{action "sort" "losses"}}>Losses</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.points:active"}} {{action "sort" "points"}}>Points</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.goalsFor:active"}} {{action "sort" "goalsFor"}}>Goals for</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.goalsAgainst:active"}} {{action "sort" "goalsAgainst"}}>Goals against</span></th>
-                    <th><span {{bindAttr class=":sort sortColumns.goalsDiff:active"}} {{action "sort" "goalsDiff"}}>Goals diff</span></th>
-                    <th class="lastFiveResults">Last five results</th>
-                </tr>
-                {{#each arrangedContent}}
-                <tr>
-                    <td>{{name}}</td>
-                    <td>{{matches}}</td>
-                    <td>{{wins}}</td>
-                    <td>{{draws}}</td>
-                    <td>{{losses}}</td>
-                    <td>{{points}}</td>
-                    <td>{{goalsFor}}</td>
-                    <td>{{goalsAgainst}}</td>
-                    <td>{{goalsDiff}}</td>
-                    <td class="lastFiveResults">
-                        {{#each lastFiveResults}}
-                            <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
-                        {{/each}}
-                    </td>
-                </tr>
+            <div class="players">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th><span {{bindAttr class=":sort sortColumns.matches:active"}} {{action "sort" "matches"}}>Matches played</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.wins:active"}} {{action "sort" "wins"}}>Wins</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.draws:active"}} {{action "sort" "draws"}}>Draws</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.losses:active"}} {{action "sort" "losses"}}>Losses</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.points:active"}} {{action "sort" "points"}}>Points</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.goalsFor:active"}} {{action "sort" "goalsFor"}}>Goals for</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.goalsAgainst:active"}} {{action "sort" "goalsAgainst"}}>Goals against</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.goalsDiff:active"}} {{action "sort" "goalsDiff"}}>Goals diff</span></th>
+                        <th class="lastFiveResults">Last five results</th>
+                    </tr>
+                    {{#each arrangedContent}}
+                    <tr>
+                        <td>{{#linkTo 'player' this.urlSlug}}{{name}}{{/linkTo}}</td>
+                        <td>{{matches}}</td>
+                        <td>{{wins}}</td>
+                        <td>{{draws}}</td>
+                        <td>{{losses}}</td>
+                        <td>{{points}}</td>
+                        <td>{{goalsFor}}</td>
+                        <td>{{goalsAgainst}}</td>
+                        <td>{{goalsDiff}}</td>
+                        <td class="lastFiveResults">
+                            {{#each lastFiveResults}}
+                                <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
+                            {{/each}}
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+
+            <div class="player">
+                {{outlet}}
+            </div>
+        </script>
+
+        <script type="text/x-handlebars" data-template-name="player">
+            <h1>{{name}}</h1>
+            <p>
+                All results: 
+                {{#each results}}
+                    <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
                 {{/each}}
-            </table>
+            </p>
         </script>
 
         <script type="text/x-handlebars" data-template-name="stats">
@@ -119,12 +136,26 @@
                 <div class="stat-label">Wost goal diff:</div>
                 <div class="stat-value">{{worstGoalDiff.name}} <span class="stat-value-detail">({{worstGoalDiff.goalsDiff}})</span></div>
             </div>
+
+            <div style="width:50%; float:left;">
+                <h2>Goals total over time</h2>
+                {{bar-chart data=goalsOverTime}}
+            </div>
+            <div style="width:50%; float:left;">
+                <h2>Goals difference over time</h2>
+                {{line-chart data=goalsDiffOverTime}}
+            </div>
         </script>
+
+        <script type="text/x-handlebars" data-template-name="components/bar-chart"></script>
+        <script type="text/x-handlebars" data-template-name="components/line-chart"></script>
 
         <script src="js/libs/jquery-1.9.1.js"></script>
         <script src="js/libs/handlebars-1.0.0.js"></script>
         <script src="js/libs/ember-1.0.0.js"></script>
         <script src="js/libs/moment.js"></script>
+        <script src="js/libs/d3.v3.js"></script>
+        <script src="js/libs/xcharts.js"></script>
         <script src="js/app.js"></script>
         <script src="matches.js"></script>
     </body>
