@@ -67,7 +67,8 @@ a.active {
 	box-sizing:border-box;
 	width:50%;
 	float:left;
-	border:1px solid #333;
+	border-bottom:1px solid #e5e5e5;
+	border-right:1px solid #e5e5e5;
 }
 
 .stat h2 {
