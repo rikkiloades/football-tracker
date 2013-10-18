@@ -3,7 +3,6 @@ App.matches = [
   		"id": 1,
 		"date": "2013-07-10 18:00:00",
 		"pitch": "7",
-		"weather": "hot",
 		"teams": [
 			{
 				"name": "Cream",
@@ -36,7 +35,6 @@ App.matches = [
 		"id": "2",
 		"date": "2013-07-13 17:00:00",
 		"pitch": "6",
-		"weather": "hot",
 		"teams": [
 			{
 				"name": "Sharkheads",
@@ -66,7 +64,6 @@ App.matches = [
 		"id": 3,
 		"date": "2013-07-26 18:00:00",
 		"pitch": "5",
-		"weather": "hot",
 		"teams": [
 			{
 				"name": "Red",
@@ -96,7 +93,6 @@ App.matches = [
 		"id": 4,
 		"date": "2013-08-02 18:00:00",
 		"pitch": "5",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Bomb Squad",
@@ -126,7 +122,6 @@ App.matches = [
 		"id": 5,
 		"date": "2013-08-09 18:00:00",
 		"pitch": "5",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
@@ -156,7 +151,6 @@ App.matches = [
 		"id": 6,
 		"date": "2013-08-11 17:00:00",
 		"pitch": "5",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
@@ -186,7 +180,6 @@ App.matches = [
 		"id": 7,
 		"date": "2013-08-14 18:00:00",
 		"pitch": "2",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Mechanics",
@@ -213,7 +206,6 @@ App.matches = [
 		"id": 8,
 		"date": "2013-08-30 18:00:00",
 		"pitch": "2",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
@@ -241,7 +233,6 @@ App.matches = [
 		"id": 9,
 		"date": "2013-09-06 18:00:00",
 		"pitch": "1",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
@@ -271,7 +262,6 @@ App.matches = [
 		"id": 10,
 		"date": "2013-09-13 18:00:00",
 		"pitch": "5",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Maccy Ds",
@@ -303,7 +293,6 @@ App.matches = [
 		"id": 11,
 		"date": "2013-09-20 18:00:00",
 		"pitch": "1",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
@@ -331,7 +320,6 @@ App.matches = [
 		"id": 12,
 		"date": "2013-09-25 18:00:00",
 		"pitch": "E",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Delta Killers",
@@ -362,7 +350,6 @@ App.matches = [
 		"id": 13,
 		"date": "2013-10-05 18:00:00",
 		"pitch": "B",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
@@ -394,7 +381,6 @@ App.matches = [
 		"id": 14,
 		"date": "2013-10-11 18:00:00",
 		"pitch": "2",
-		"weather": "cold",
 		"teams": [
 			{
 				"name": "Red",
@@ -422,7 +408,6 @@ App.matches = [
 		"id": 15,
 		"date": "2013-10-18 18:00:00",
 		"pitch": "6",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Raging Heroes",
@@ -452,7 +437,6 @@ App.matches = [
 		"id": 16,
 		"date": "2013-10-18 18:30:00",
 		"pitch": "6",
-		"weather": "mild",
 		"teams": [
 			{
 				"name": "Red",
