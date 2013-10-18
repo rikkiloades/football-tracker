@@ -204,44 +204,12 @@ App.PlayerRoute = Ember.Route.extend({
 });
 
 App.StatsController = Ember.ObjectController.extend({
-	bestGoalDiff: function() {
-		var bestGoalDiff = null;
-		App.get('players').forEach(function(player) {
-			if (bestGoalDiff === null) {
-				bestGoalDiff = player;
-				return;
-			}
-
-			if (bestGoalDiff.get('goalsDiff') < player.get('goalsDiff')) {
-				bestGoalDiff = player;
-			}
-		});
-
-		return bestGoalDiff;
-	}.property('App.players.@each.goalsDiff'),
-
-	worstGoalDiff: function() {
-		var worstGoalDiff = null;
-		App.get('players').forEach(function(player) {
-			if (worstGoalDiff === null) {
-				worstGoalDiff = player;
-				return;
-			}
-
-			if (worstGoalDiff.get('goalsDiff') > player.get('goalsDiff')) {
-				worstGoalDiff = player;
-			}
-		});
-
-		return worstGoalDiff;
-	}.property('App.players.@each.goalsDiff'),
-
 	goalsOverTime: function() {
 		var matchGoals = [];
 		
 		App.get('matches').forEach(function(match) {
 			matchGoals.push({
-				x: match.date.substr(5, 5),
+				x: moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate(),
 				y: match.goals
 			});
 		});
@@ -254,7 +222,7 @@ App.StatsController = Ember.ObjectController.extend({
 		
 		App.get('matches').forEach(function(match) {
 			matchGoals.push({
-				x: match.date.substr(5, 5),
+				x: moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate(),
 				y: match.winningGoalDiff
 			});
 		});
@@ -264,62 +232,82 @@ App.StatsController = Ember.ObjectController.extend({
 });
 
 App.BarChartComponent = Ember.Component.extend({
-	tagName: 'div',
-	attributeBindings:['style'],
-	style: function() {
-		return 'width:' + this.get('width') + 'px;height:' + this.get('height') + 'px;';
-	}.property('width', 'height'),
-	width: 400,
+	tagName: 'svg',
+	attributeBindings: ['height'],
 	height: 300,
-	chart: null,
-	xScale: 'ordinal',
-	yScale: 'linear',
 	
 	didInsertElement: function() {
-		var data = {
-			xScale: this.get('xScale'),
-			yScale: this.get('yScale'),
-			type: 'bar',
-			main: [
-				{
-					className: this.get('elementId'),
-			 		data: this.get('data')
-			 	}
-			]
-		};
+		var data = [
+			{
+				values: this.get('data')
+			}
+		];
 
-		var chart = new xChart('bar', data, '#' + this.get('elementId'));
-		this.set('chart', chart);
+		var elementId = this.get('elementId');
+
+		nv.addGraph(function() {
+			var chart = nv.models.discreteBarChart()
+				.x(function(d) { return d.x })
+				.y(function(d) { return d.y })
+				.staggerLabels(true)
+				.tooltips(false)
+				.showValues(true)
+				.valueFormat(d3.format('d'));
+
+			chart.yAxis
+				.tickFormat(d3.format('d'))
+
+			chart.xAxis
+				.tickFormat(d3.time.format('%e %b'));
+
+			d3.select('#' + elementId)
+				.datum(data)
+				.transition().duration(500)
+				.call(chart);
+
+			nv.utils.windowResize(chart.update);
+
+			return chart;
+		});
 	}
 });
 
 App.LineChartComponent = Ember.Component.extend({
-	tagName: 'div',
-	attributeBindings:['style'],
-	style: function() {
-		return 'width:' + this.get('width') + 'px;height:' + this.get('height') + 'px;';
-	}.property('width', 'height'),
-	width: 400,
+	tagName: 'svg',
+	attributeBindings: ['height'],
 	height: 300,
-	chart: null,
-	xScale: 'ordinal',
-	yScale: 'linear',
 	
 	didInsertElement: function() {
-		var data = {
-			xScale: this.get('xScale'),
-			yScale: this.get('yScale'),
-			type: 'line-dotted',
-			main: [
-				{
-					className: this.get('elementId'),
-			 		data: this.get('data')
-			 	}
-			]
-		};
+		var data = [
+			{
+				values: this.get('data'),
+				key: 'Goal difference',
+				color: '#0099ff'
+			}
+		];
 
-		var chart = new xChart('line-dotted', data, '#' + this.get('elementId'));
-		this.set('chart', chart);
+		var elementId = this.get('elementId');
+
+		nv.addGraph(function() {
+			var chart = nv.models.lineChart();
+
+			chart.yAxis
+				.tickFormat(d3.format('d'));
+
+			chart.xAxis
+				.tickFormat(d3.time.format('%e %b'));
+
+			d3.select('#' + elementId)
+				.datum(data)
+				.transition().duration(500).call(chart);
+
+			nv.utils.windowResize(function() {
+				chart.update();
+			});
+
+			return chart;
+		});
+		
 	}
 });
 
