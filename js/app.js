@@ -222,7 +222,7 @@ App.StatsController = Ember.ObjectController.extend({
 		
 		App.get('matches').forEach(function(match) {
 			matchGoals.push({
-				x: moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate(),
+				x: match.id,
 				y: match.winningGoalDiff
 			});
 		});
@@ -249,13 +249,13 @@ App.BarChartComponent = Ember.Component.extend({
 			var chart = nv.models.discreteBarChart()
 				.x(function(d) { return d.x })
 				.y(function(d) { return d.y })
-				.staggerLabels(true)
+				.color(['#0099ff'])
 				.tooltips(false)
 				.showValues(true)
 				.valueFormat(d3.format('d'));
 
 			chart.yAxis
-				.tickFormat(d3.format('d'))
+				.tickFormat(d3.format('d'));
 
 			chart.xAxis
 				.tickFormat(d3.time.format('%e %b'));
@@ -295,7 +295,7 @@ App.LineChartComponent = Ember.Component.extend({
 				.tickFormat(d3.format('d'));
 
 			chart.xAxis
-				.tickFormat(d3.time.format('%e %b'));
+				.tickFormat(function(d) { return ''; });
 
 			d3.select('#' + elementId)
 				.datum(data)
