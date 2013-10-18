@@ -9,7 +9,7 @@
 
         <link href="http://fonts.googleapis.com/css?family=Voces" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/xcharts.css">
+        <link rel="stylesheet" href="css/nv.d3.css">
         <link rel="stylesheet" href="css/style.css">
 
         <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -129,19 +129,10 @@
 
         <script type="text/x-handlebars" data-template-name="stats">
             <div class="stat">
-                <div class="stat-label">Best goal diff:</div>
-                <div class="stat-value">{{bestGoalDiff.name}} <span class="stat-value-detail">({{bestGoalDiff.goalsDiff}})</span></div>
-            </div>
-            <div class="stat">
-                <div class="stat-label">Wost goal diff:</div>
-                <div class="stat-value">{{worstGoalDiff.name}} <span class="stat-value-detail">({{worstGoalDiff.goalsDiff}})</span></div>
-            </div>
-
-            <div style="width:50%; float:left;">
                 <h2>Goals total over time</h2>
                 {{bar-chart data=goalsOverTime}}
             </div>
-            <div style="width:50%; float:left;">
+            <div class="stat">
                 <h2>Goals difference over time</h2>
                 {{line-chart data=goalsDiffOverTime}}
             </div>
@@ -155,7 +146,7 @@
         <script src="js/libs/ember-1.0.0.js"></script>
         <script src="js/libs/moment.js"></script>
         <script src="js/libs/d3.v3.js"></script>
-        <script src="js/libs/xcharts.js"></script>
+        <script src="js/libs/nv.d3.js"></script>
         <script src="js/app.js"></script>
         <script src="matches.js"></script>
     </body>
