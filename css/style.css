@@ -112,6 +112,7 @@ table th {
 	text-align:right;
 	font-size:10px;
 	text-transform:uppercase;
+	white-space:nowrap;
 }
 
 table td {
@@ -257,7 +258,7 @@ table .lastFiveResults {
 }
 
 .match-teamname {
-	font-size:32px;
+	font-size:24px;
 	margin-bottom:8px;
 	color:#333;
 }
@@ -318,6 +319,7 @@ table .lastFiveResults {
 
 .sort {
 	cursor:pointer;
+	white-space:nowrap;
 }
 
 .sort:hover,
