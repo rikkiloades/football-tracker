@@ -228,7 +228,20 @@ App.StatsController = Ember.ObjectController.extend({
 		});
 
 		return matchGoals;
-	}.property('App.matches.@each.goals')
+	}.property('App.matches.@each.goals'),
+
+	playerCountOverTime: function() {
+		var playerCounts = [];
+		
+		App.get('matches').forEach(function(match) {
+			playerCounts.push({
+				x: moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate(),
+				y: match.teams[0].players.length + match.teams[1].players.length
+			});
+		});
+
+		return playerCounts;
+	}.property('App.matches')
 });
 
 App.BarChartComponent = Ember.Component.extend({
@@ -252,7 +265,8 @@ App.BarChartComponent = Ember.Component.extend({
 				.color(['#0099ff'])
 				.tooltips(false)
 				.showValues(true)
-				.valueFormat(d3.format('d'));
+				.valueFormat(d3.format('d'))
+				.staggerLabels(true);
 
 			chart.yAxis
 				.tickFormat(d3.format('d'));
@@ -281,7 +295,6 @@ App.LineChartComponent = Ember.Component.extend({
 		var data = [
 			{
 				values: this.get('data'),
-				key: 'Goal difference',
 				color: '#0099ff'
 			}
 		];

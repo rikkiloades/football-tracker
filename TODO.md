@@ -12,7 +12,7 @@ Below is a collection of improvements to the app which are being considered.
 
 # Matches
 
-- Way of visually grouping games together by each month
+- Way of visually grouping games together by each month (GroupableMixin)
 - Support for upcoming match fixtures (don't count towards stats but are displayed in match listing with no score and kick off time, pitch)
 
 # Players
@@ -24,7 +24,6 @@ Below is a collection of improvements to the app which are being considered.
 # Statistics
 
 - Plays per month per player, graphed (github punchcard)
-- Score graphed over time (line)
 - Home vs away scores graphed (bar or line)
 - Played together the most (text)
 - Player counts per match over time (bar graph)

@@ -7,7 +7,8 @@
         <meta name="keywords" content="football, stats, analysing">
         <meta name="description" content="Explore and analyse a set of football match data.">
 
-        <link href="http://fonts.googleapis.com/css?family=Voces" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Maven+Pro:400,500,700" rel="stylesheet" type="text/css">
+        
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/nv.d3.css">
         <link rel="stylesheet" href="css/style.css">
@@ -18,13 +19,11 @@
 
         <script type="text/x-handlebars">
             <header class="primary-nav">
-                <img src="img/icon.png" width="64" height="64" alt="Football Tracker">
-
                 <nav>
                     <ul>
-                        <li>{{#linkTo 'matches'}}Matches{{/linkTo}}</li>
-                        <li>{{#linkTo 'players'}}Players{{/linkTo}}</li>
-                        <li>{{#linkTo 'stats'}}Stats{{/linkTo}}</li>
+                        <li>{{#linkTo 'matches' class="icon icon-matches"}}Matches{{/linkTo}}</li>
+                        <li>{{#linkTo 'players' class="icon icon-players"}}Players{{/linkTo}}</li>
+                        <li>{{#linkTo 'stats' class="icon icon-stats"}}Stats{{/linkTo}}</li>
                     </ul>
                 </nav>
             </header>
@@ -110,21 +109,25 @@
                     </tr>
                     {{/each}}
                 </table>
-            </div>
-
-            <div class="player">
                 {{outlet}}
             </div>
         </script>
 
         <script type="text/x-handlebars" data-template-name="player">
-            <h1>{{name}}</h1>
-            <p>
-                All results: 
-                {{#each results}}
-                    <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
-                {{/each}}
-            </p>
+            <div class="player">
+                <h1 class="player-name">{{name}}</h1>
+                {{#linkTo 'players' class="player-close-link"}}Back{{/linkTo}}
+                <p>
+                    {{#each results}}
+                        <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
+                    {{/each}}
+                </p>
+                <p>Rank: <strong>{{ranking}}</strong></p>
+                <p>Matches played: <strong>{{matches}}</strong></p>
+                <p>Points: <strong>{{points}}</strong></p>
+                <p>Results: <strong>{{wins}}</strong> wins, <strong>{{draws}}</strong> draws, <strong>{{losses}}</strong> losses.</p>
+                <p>Goals: <strong>{{goalsFor}}</strong> for, <strong>{{goalsAgainst}}</strong> against (<strong>{{goalsDiff}}</strong>)</p>
+            </div>
         </script>
 
         <script type="text/x-handlebars" data-template-name="stats">
@@ -135,6 +138,10 @@
             <div class="stat">
                 <h2>Goals difference over time</h2>
                 {{line-chart data=goalsDiffOverTime}}
+            </div>
+            <div class="stat">
+                <h2>Player count over time</h2>
+                {{bar-chart data=playerCountOverTime}}
             </div>
         </script>
 
