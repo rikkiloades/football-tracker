@@ -80,7 +80,7 @@
                 <table>
                     <tr>
                         <th>Name</th>
-                        <th><span {{bindAttr class=":sort sortColumns.matches:active"}} {{action "sort" "matches"}}>Matches played</span></th>
+                        <th><span {{bindAttr class=":sort sortColumns.matches:active"}} {{action "sort" "matches"}}>Played</span></th>
                         <th><span {{bindAttr class=":sort sortColumns.wins:active"}} {{action "sort" "wins"}}>Wins</span></th>
                         <th><span {{bindAttr class=":sort sortColumns.draws:active"}} {{action "sort" "draws"}}>Draws</span></th>
                         <th><span {{bindAttr class=":sort sortColumns.losses:active"}} {{action "sort" "losses"}}>Losses</span></th>
@@ -118,6 +118,7 @@
                 <h1 class="player-name">{{name}}</h1>
                 {{#linkTo 'players' class="player-close-link"}}Back{{/linkTo}}
                 <p>
+                    Results:<br>
                     {{#each results}}
                         <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
                     {{/each}}

@@ -44,6 +44,9 @@ App = Ember.Application.create({
 				else {
 					player.get('results').push('draw');
 				}
+
+				var lastPlayed = moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate();
+				player.set('lastPlayed', lastPlayed);
 			});
 
 			match.teams[1].players.forEach(function(player) {
@@ -61,6 +64,9 @@ App = Ember.Application.create({
 				else {
 					player.get('results').push('draw');
 				}
+
+				var lastPlayed = moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate();
+				player.set('lastPlayed', lastPlayed);
 			});
 		});
 
@@ -74,12 +80,15 @@ App.Player = Ember.Object.extend({
 	urlSlug: function() {
 		return this.get('name').toLowerCase().replace(/\s/g, '-').replace(/[^a-z\-]+/ig, '');
 	}.property('name'),
+	
 	lastFiveResults: function() {
 		return this.get('results').slice(-5);
 	}.property('results'),
+	
 	matches: function() {
 		return this.get('results').length;
 	}.property('results'),
+
 	wins: function() {
 		var wins = 0;
 		this.get('results').forEach(function(result) {
@@ -90,6 +99,7 @@ App.Player = Ember.Object.extend({
 
 		return wins;
 	}.property('results'),
+
 	losses: function() {
 		var losses = 0;
 		this.get('results').forEach(function(result) {
@@ -100,6 +110,7 @@ App.Player = Ember.Object.extend({
 
 		return losses;
 	}.property('results'),
+	
 	draws: function() {
 		var draws = 0;
 		this.get('results').forEach(function(result) {
@@ -110,6 +121,7 @@ App.Player = Ember.Object.extend({
 
 		return draws;
 	}.property('results'),
+	
 	points: function() {
 		var points = 0;
 
