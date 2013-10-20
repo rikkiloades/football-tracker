@@ -45,7 +45,7 @@ App = Ember.Application.create({
 					player.get('results').push('draw');
 				}
 
-				var lastPlayed = moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate().getTime();
+				var lastPlayed = moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate();
 				player.set('lastPlayed', lastPlayed);
 			});
 
@@ -65,7 +65,7 @@ App = Ember.Application.create({
 					player.get('results').push('draw');
 				}
 
-				var lastPlayed = moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate().getTime();
+				var lastPlayed = moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate();
 				player.set('lastPlayed', lastPlayed);
 			});
 		});
