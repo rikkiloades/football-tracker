@@ -212,17 +212,21 @@ table .lastFiveResults {
 
 .match-date {
 	display:block;
-	font-size:10px;
+	font-size:12px;
 	line-height:1.5;
 	text-align:center;
+	text-transform:uppercase;
 }
 .team-name-home,
 .team-name-away {
 	display:block;
 	float:left;
-	width:40%;
+	width:35%;
 	font-size:16px;
 	padding-top:8px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
 }
 .team-name-home {
 	text-align:right;
@@ -232,7 +236,7 @@ table .lastFiveResults {
 	display:block;
 	float:left;
 	text-align:center;
-	width:20%;
+	width:30%;
 	font-weight:bold;
 	font-size:24px;
 }
