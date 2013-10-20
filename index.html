@@ -118,6 +118,7 @@
                 <h1 class="player-name">{{name}}</h1>
                 {{#linkTo 'players' class="player-close-link"}}Back{{/linkTo}}
                 <p>
+                    Results:<br>
                     {{#each results}}
                         <span {{bindAttr class=":result this"}}><span>{{this}}</span></span>
                     {{/each}}
