@@ -271,8 +271,8 @@ App.matches = [
 					"Rob",
 					"Danny P",
 					"Emma",
-					"John (Mr X)",
-					"Sam (Mr Z)"
+					"John",
+					"Sam"
 				]
 			},
 			{
@@ -298,7 +298,7 @@ App.matches = [
 				"name": "Red",
 				"score": 21,
 				"players": [
-					"John (Mr X)",
+					"John",
 					"Rikki",
 					"Dan Wood",
 					"Kirstie"
@@ -308,7 +308,7 @@ App.matches = [
 				"name": "Blue",
 				"score": 22,
 				"players": [
-					"Sam (Mr Z)",
+					"Sam",
 					"Rob",
 					"Ruben",
 					"Danny P"
@@ -325,7 +325,7 @@ App.matches = [
 				"name": "Delta Killers",
 				"score": 3,
 				"players": [
-					"Sam (Mr Z)",
+					"Sam",
 					"Rikki",
 					"Dan Wood",
 					"Kirstie",
@@ -336,7 +336,7 @@ App.matches = [
 				"name": "Chaotic Mudsharks",
 				"score": 3,
 				"players": [
-					"John (Mr X)",
+					"John",
 					"Rob",
 					"Ruben",
 					"Emma",
@@ -355,7 +355,7 @@ App.matches = [
 				"name": "Red",
 				"score": 9,
 				"players": [
-					"Sam (Mr Z)",
+					"Sam",
 					"Celtic Supporter",
 					"Kirstie",
 					"Rob",
@@ -367,7 +367,7 @@ App.matches = [
 				"name": "Blue",
 				"score": 10,
 				"players": [
-					"John (Mr X)",
+					"John",
 					"Rikki",
 					"Ruben",
 					"Emma",
@@ -386,7 +386,7 @@ App.matches = [
 				"name": "Red",
 				"score": 27,
 				"players": [
-					"John (Mr X)",
+					"John",
 					"Rob",
 					"Ryan",
 					"Danny P"
@@ -413,7 +413,7 @@ App.matches = [
 				"name": "Raging Heroes",
 				"score": 7,
 				"players": [
-					"John (Mr X)",
+					"John",
 					"Ryan",
 					"Josh",
 					"Darren",
@@ -443,7 +443,7 @@ App.matches = [
 				"score": 2,
 				"players": [
 					"Darren",
-					"John (Mr X)",
+					"John",
 					"Kirstie",
 					"Danny P",
 					"Stephen"
@@ -458,6 +458,34 @@ App.matches = [
 					"Ryan",
 					"Josh",
 					"Cedric",
+				]
+			}
+		]
+	},
+	{
+		"id": 17,
+		"date": "2013-10-23 18:00:00",
+		"pitch": "4",
+		"teams": [
+			{
+				"name": "Red",
+				"score": 17,
+				"players": [
+					"Rob",
+					"John",
+					"Danny P",
+					"Sam",
+					"Cedric"
+				]
+			},
+			{
+				"name": "Blue",
+				"score": 12,
+				"players": [
+					"Rikki",
+					"Darren",
+					"Russel",
+					"Ruben"
 				]
 			}
 		]
