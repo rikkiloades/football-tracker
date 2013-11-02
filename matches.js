@@ -492,12 +492,12 @@ App.matches = [
 	},
 	{
 		"id": 18,
-		"date": "2013-10-23 18:00:00",
-		"pitch": "4",
+		"date": "2013-11-01 18:00:00",
+		"pitch": "6",
 		"teams": [
 			{
-				"name": "Red",
-				"score": 17,
+				"name": "Crash Test Dummies",
+				"score": 2,
 				"players": [
 					"Rob",
 					"Ryan",
@@ -508,8 +508,8 @@ App.matches = [
 				]
 			},
 			{
-				"name": "Blue",
-				"score": 12,
+				"name": "Scorpion Chasers",
+				"score": 7,
 				"players": [
 					"John",
 					"Darren",
