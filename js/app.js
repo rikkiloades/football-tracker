@@ -130,6 +130,11 @@ App.Player = Ember.Object.extend({
 
 		return points;
 	}.property('wins', 'draws'),
+
+	winPct: function() {
+		return this.get('wins') / this.get('matches');
+	}.property('wins', 'matches'),
+
 	goalsDiff: function() {
 		return this.get('goalsFor') - this.get('goalsAgainst');
 	}.property('goalsFor', 'goalsAgainst')
@@ -187,6 +192,7 @@ App.PlayersController = Ember.ArrayController.extend({
 		draws: false,
 		losses: false,
 		points: true,
+		winPct: false,
 		goalsFor: false,
 		goalsAgainst: false,
 		goalsDiff: false
@@ -336,18 +342,18 @@ App.LineChartComponent = Ember.Component.extend({
 	}
 });
 
-Ember.Handlebars.helper('fxdate', function(value, options) {
+Ember.Handlebars.helper('fmtdate', function(value, options) {
 	return moment(value, 'YYYY-MM-DD HH:mm:ss').format('Do MMM');
 });
 
-Ember.Handlebars.helper('fxtime', function(value, options) {
+Ember.Handlebars.helper('fmttime', function(value, options) {
 	return moment(value, 'YYYY-MM-DD HH:mm:ss').format('HH:mm');
 });
 
-Ember.Handlebars.helper('fxpct', function(value, options) {
+Ember.Handlebars.helper('fmtpct', function(value, options) {
 	return Math.round(parseFloat(value) * 100) + '%';
 });
 
-Ember.Handlebars.helper('fxround', function(value, options) {
+Ember.Handlebars.helper('fmtround', function(value, options) {
 	return Math.round(value);
 });

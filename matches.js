@@ -484,7 +484,7 @@ App.matches = [
 				"players": [
 					"Rikki",
 					"Darren",
-					"Russel",
+					"Russell",
 					"Ruben"
 				]
 			}
