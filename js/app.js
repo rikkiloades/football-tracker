@@ -34,7 +34,7 @@ App = Ember.Application.create({
 
 				player.incrementProperty('goalsFor', match.teams[0].score);
 				player.incrementProperty('goalsAgainst', match.teams[1].score);
-				
+
 				if (match.teams[0].score > match.teams[1].score) {
 					player.get('results').push('win');
 				}
@@ -54,7 +54,7 @@ App = Ember.Application.create({
 
 				player.incrementProperty('goalsFor', match.teams[1].score);
 				player.incrementProperty('goalsAgainst', match.teams[0].score);
-				
+
 				if (match.teams[1].score > match.teams[0].score) {
 					player.get('results').push('win');
 				}
@@ -70,7 +70,11 @@ App = Ember.Application.create({
 			});
 		});
 
-		for (var i in players ) {
+		for (var i in players) {
+			if (players[i].get('name').match(/^(?:Vil|Obead|Elliot|Alex|Oli|Axel|Norbe|Pat|Jay|Matt|Dragan|Sam)$/i)) {
+				continue;
+			}
+
 			this.players.unshift(players[i]);
 		}
 	}
@@ -80,11 +84,11 @@ App.Player = Ember.Object.extend({
 	urlSlug: function() {
 		return this.get('name').toLowerCase().replace(/\s/g, '-').replace(/[^a-z\-]+/ig, '');
 	}.property('name'),
-	
+
 	lastFiveResults: function() {
 		return this.get('results').slice(-5);
 	}.property('results'),
-	
+
 	matches: function() {
 		return this.get('results').length;
 	}.property('results'),
@@ -110,7 +114,7 @@ App.Player = Ember.Object.extend({
 
 		return losses;
 	}.property('results'),
-	
+
 	draws: function() {
 		var draws = 0;
 		this.get('results').forEach(function(result) {
@@ -121,7 +125,7 @@ App.Player = Ember.Object.extend({
 
 		return draws;
 	}.property('results'),
-	
+
 	points: function() {
 		var points = 0;
 
@@ -224,7 +228,7 @@ App.PlayerRoute = Ember.Route.extend({
 App.StatsController = Ember.ObjectController.extend({
 	goalsOverTime: function() {
 		var matchGoals = [];
-		
+
 		App.get('matches').forEach(function(match) {
 			matchGoals.push({
 				x: moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate(),
@@ -237,7 +241,7 @@ App.StatsController = Ember.ObjectController.extend({
 
 	goalsDiffOverTime: function() {
 		var matchGoals = [];
-		
+
 		App.get('matches').forEach(function(match) {
 			matchGoals.push({
 				x: match.id,
@@ -250,7 +254,7 @@ App.StatsController = Ember.ObjectController.extend({
 
 	playerCountOverTime: function() {
 		var playerCounts = [];
-		
+
 		App.get('matches').forEach(function(match) {
 			playerCounts.push({
 				x: moment(match.date, 'YYYY-MM-DD HH:mm:ss').toDate(),
@@ -266,7 +270,7 @@ App.BarChartComponent = Ember.Component.extend({
 	tagName: 'svg',
 	attributeBindings: ['height'],
 	height: 300,
-	
+
 	didInsertElement: function() {
 		var data = [
 			{
@@ -308,7 +312,7 @@ App.LineChartComponent = Ember.Component.extend({
 	tagName: 'svg',
 	attributeBindings: ['height'],
 	height: 300,
-	
+
 	didInsertElement: function() {
 		var data = [
 			{
@@ -338,7 +342,7 @@ App.LineChartComponent = Ember.Component.extend({
 
 			return chart;
 		});
-		
+
 	}
 });
 
