@@ -19,7 +19,7 @@ App.matches = [
 			{
 				"name": "Jam",
 				"score": 10,
-				"players" :[
+				"players": [
 					"Rob",
 					"Stephen",
 					"Jason",
@@ -48,12 +48,42 @@ App.matches = [
             {
                 "name": "Blue",
                 "score": 17,
-                "players" :[
+                "players": [
                     "Rikki",
                     "Darren",
                     "Ruben",
                     "Ryan",
                     "Geoffrey"
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "date": "2013-10-24 18:00:00",
+        "pitch": "6",
+        "teams": [
+            {
+                "name": "Red",
+                "score": 5,
+                "players": [
+                    "Rob",
+                    "Stephen",
+                    "Dan W",
+                    "Josh",
+                    "Cedric",
+                    "Ruben"
+                ]
+            },
+            {
+                "name": "Blue",
+                "score": 9,
+                "players": [
+                    "Rikki",
+                    "Darren",
+                    "Ryan",
+                    "Geoffrey",
+                    "Kirstie"
                 ]
             }
         ]
