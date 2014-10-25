@@ -72,7 +72,8 @@ App.matches = [
                     "Dan W",
                     "Josh",
                     "Cedric",
-                    "Ruben"
+                    "Ruben",
+                    "Emma"
                 ]
             },
             {
@@ -83,7 +84,8 @@ App.matches = [
                     "Darren",
                     "Ryan",
                     "Geoffrey",
-                    "Kirstie"
+                    "Kirstie",
+                    "Ryan"
                 ]
             }
         ]
